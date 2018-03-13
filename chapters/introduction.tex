@@ -2,19 +2,19 @@
 \chapter{Introduction}
 \label{introduction}
 
-\section{Format}
-FORMAT:
+%\section{Format}
+%FORMAT:
+%
+%Introduce flocking, then introduce influencing agents. Talk about low-density
+%vs. high-density, and briefly mention hand-crafted algorithms for dealing with
+%low-density flocking. Finally, talk about using genetic algorithms for both.
 
-Introduce flocking, then introduce influencing agents. Talk about low-density
-vs. high-density, and briefly mention hand-crafted algorithms for dealing with
-low-density flocking. Finally, talk about using genetic algorithms for both.
-
-\section{Barbara Intro}
+%\section{Barbara Intro}
 
 Across nature, flocking behavior can be found in a variety of species, from 
 flocks of birds, to herds of quadrupeds, schools of fish, or swarms of insects.
 In such species, groups exhibiting collective behavior emerge from simple, 
-local rules \cite{sumpter2010collective}.
+local rules \citep{sumpter2010collective}.
 An open question is whether externally-controlled influencing agents can be 
 used to affect the behavior of flocks.
 
@@ -25,11 +25,13 @@ has explored the use of influencing agents to guide flocking
 agents to face a target direction in small and toroidal settings.
 In such settings, agent density is high, so interactions are common, and flock
 formation is rapid.
-In this work, we focus on lower-density settings where interactions are rarer
-and flock formation is more difficult.
-We study how influencing agent priorities must change in these settings to be
-successful and propose new influencing agent strategies to adapt to the
-challenges posed by these settings.
+In this work, we build upon past work by studying lower-density settings where
+interactions are rarer and flock formation is more difficult.
+As a result, influencing agent priorities must change in these settings to be
+successful.
+We tackle the problems introduced by these new settings by introducing new
+influencing agent strategies and by using genetic programming to automatically
+explore a wide range of the solution space.
 
 Low-density settings are important to study because they capture dynamics in
 situations where flocking may not occur naturally, but where we might want to
@@ -113,55 +115,7 @@ Finally, we find that reasonable placement strategies are often
 interchangeable, and that more complex strategies often perform similarly to 
 random strategies.
 
-The main contributions of this work are:
-\begin{itemize}
-    \item An investigation of two new low-density flocking settings, where
-    flock formation is more difficult.
-    \item The introduction of new placement strategies and influencing agent
-    behaviors to adapt to the difficulties presented by these new settings.
-    \item Analysis of the major differences in influencing agent priorities in
-    low-density vs. high-density settings.
-\end{itemize}
-
-The rest of this paper is organized as follows: \S\ref{sec:problem} describes 
-our formal flocking model and our new test settings. \S\ref{sec:influencing} 
-describes the role of influencing agents and formalizes concepts of placement 
-strategies and behaviors.
-\S\ref{sec:experimental} describes our experimental setup and the experiments 
-we run to evaluate our placement strategies and behaviors in our test settings.
-We discuss the results and their implications in \S\ref{sec:evaluation}.
-In \S\ref{sec:related}, we discuss related work and other approaches.
-Finally, we conclude and discuss future work in \S\ref{sec:conclusion}.
-
-\section{Radhika Intro}
-
-Across nature, flocking behavior can be found in a variety of species, from 
-flocks of birds, to herds of quadrupeds, schools of fish, or swarms of insects.
-In such species, groups exhibit collective behavior that emerges from simple, 
-local rules \cite{sumpter2010collective}.
-An open question is whether externally-controlled influencing agents can be 
-used to affect the behavior of flocks.
-For example, environmental engineers might want to steer flocks of birds away 
-from windmills, or steer a school of fish away from critical dam
-infrastructure.
-
-Previous work in the literature has primarily studied hand constructed
-behaviors for such influencing agents.
-In this work, we aim to explore a wider range of the solution space using
-evolutionary algorithms to automatically generate and evaluate different
-influencing behaviors.
-
-To start, we limit ourselves to purely ad hoc behaviors; influencing agents
-know of a goal direction ahead of time, but otherwise cannot co-ordinate with
-each other in any way.
-Instead, influencing agents must choose a direction simply based on the relative
-position and heading of their neighbors.
-This allows for direct comparisons to previous work by Genter and Stone, which
-proposed algorithms that operate under similar constraints
-\cite{genter2013backsearch, genter2013visionstationary,
-genter2014neighborsorientherd, genter2015placement,
-genter2016facegoalfacecurrent, genter201612steplookahead, genterthesis}.
-
+Next, we use genetic programming to generate different local behaviors.
 In order to build behaviors that work with variable numbers of neighbors, we
 evolve programs that are applied iteratively to each neighbor using
 a functional programming construct called a fold.
@@ -170,7 +124,7 @@ accumulator value for each one.
 The final value of the computation is the value of the accumulator after each
 item has been folded over.
 
-In our work, we define a simple language that performs arithmetic computations
+We define a simple language that performs arithmetic computations
 on scalar values and angles, and evolve different functions to use in the fold.
 To make the evolutionary process fast enough, we first evaluate different
 functions in a small environment, with six neighbors that start in a circle
@@ -183,39 +137,9 @@ fitness value for the proposed program.
 We then run the evolutionary algorithm on this fitness value and mutate the
 best candidates each generation.
 
-Next, we evaluate the candidates generated by the evolutionary algorithm against
-a larger setting drawn from the literature.
-To help organize this part of the analysis, we split influencing agent design
-into three different aspects: placement strategy, local behaviors, and global
-behaviors.
-Placement strategies refer to the initial placement of influencing agents in
-the simulation space and their placement relative to flocking agents.
-Local behaviors dictate how an influencing agent attempts to influence local
-neighbors to face a given goal direction.
-These are equivalent to the ad hoc behaviors that we are evolving, and we use
-our evolved ad hoc behaviors for this aspect of the broader analysis.
-Global behaviors, on the other hand, dictate how influencing agents determine
-their goal direction.
-For example, we might program all the influencing agents to have a
-pre-determined goal direction such as East or South, or we might program a
-global behavior that picks a goal direction after some time based on the
-initial dynamics of the simulation.
-
-We take placement strategies and global behaviors from previous literature and
-evaluate their efficacy in a larger test setting, also drawn from the
-literature.
-In this setting, proposed in previous work \cite{Fu2017}, the agents start out
-in a $1000x1000$ toroidal grid, and the simulation is run until half the agents
-converge to one direction.
-In this setting, agent density is low, so interactions are rare.
-However, flock formation is still provably guaranteed, so the metric of interest
-is how much faster the influencing agents can help the Reynolds-Viscek agents
-reach convergence.
-Previous work found that in low-density settings, it is important for agents to
-maintain influence over time; behaviors designed to quickly encourage
-convergence tended to turn influencing agents in directions that took them away
-from the flock.
-
+To evaluate the evolved local behaviors in a wider context, we pair the local
+behaviors with global behaviors and evaluate them in both high-density and
+low-density settings.
 We find that the genetic behaviors can both encourage faster convergence in the
 short term while still maintaining influence over the long-term.
 As a result, they can outperform the best hand-constructed algorithms in small
@@ -228,6 +152,12 @@ global behaviors.
 
 The main contributions of this work are:
 \begin{itemize}
+    \item An investigation of two new low-density flocking settings, where
+    flock formation is more difficult.
+    \item The introduction of new placement strategies and influencing agent
+    behaviors to adapt to the difficulties presented by these new settings.
+    \item Analysis of the major differences in influencing agent priorities in
+    low-density vs. high-density settings.
     \item A functional language to define ad hoc influencing agent behaviors.
     \item An evolutionary algorithm to evolve and evaluate candidate programs in
     this language.
@@ -235,13 +165,125 @@ The main contributions of this work are:
     their strengths and shortcomings relative to hand-constructed algorithms.
 \end{itemize}
 
-The rest of this paper is organized as follows: \S\ref{sec:related} discusses
-recent work in this area and how it relates to our work.
-\S\ref{sec:problem} describes the formal flocking model and the role of
-influencing agents.
-\S\ref{sec:evolving} discusses our domain-specific language and evolutionary
-algorithm.
-\S\ref{sec:evaluation} describes our experimental setup in more detail, and
-presents the results of our experiments.
+The rest of this paper is organized as follows: \S\ref{sec:problem} describes 
+our formal flocking model and our new test settings. \S\ref{sec:influencing} 
+describes the role of influencing agents and formalizes concepts of placement 
+strategies and behaviors.
+\S\ref{sec:experimental} describes our experimental setup and the experiments 
+we run to evaluate our placement strategies and behaviors in our test settings.
+We discuss the results and their implications in \S\ref{sec:evaluation}.
+In \S\ref{sec:related}, we discuss related work and other approaches.
 Finally, we conclude and discuss future work in \S\ref{sec:conclusion}.
+
+%\section{Radhika Intro}
+%
+%Across nature, flocking behavior can be found in a variety of species, from 
+%flocks of birds, to herds of quadrupeds, schools of fish, or swarms of insects.
+%In such species, groups exhibit collective behavior that emerges from simple, 
+%local rules \cite{sumpter2010collective}.
+%An open question is whether externally-controlled influencing agents can be 
+%used to affect the behavior of flocks.
+%For example, environmental engineers might want to steer flocks of birds away 
+%from windmills, or steer a school of fish away from critical dam
+%infrastructure.
+%
+%Previous work in the literature has primarily studied hand constructed
+%behaviors for such influencing agents.
+%In this work, we aim to explore a wider range of the solution space using
+%evolutionary algorithms to automatically generate and evaluate different
+%influencing behaviors.
+%
+%To start, we limit ourselves to purely ad hoc behaviors; influencing agents
+%know of a goal direction ahead of time, but otherwise cannot co-ordinate with
+%each other in any way.
+%Instead, influencing agents must choose a direction simply based on the relative
+%position and heading of their neighbors.
+%This allows for direct comparisons to previous work by Genter and Stone, which
+%proposed algorithms that operate under similar constraints
+%\cite{genter2013backsearch, genter2013visionstationary,
+%genter2014neighborsorientherd, genter2015placement,
+%genter2016facegoalfacecurrent, genter201612steplookahead, genterthesis}.
+%
+%In order to build behaviors that work with variable numbers of neighbors, we
+%evolve programs that are applied iteratively to each neighbor using
+%a functional programming construct called a fold.
+%In a fold, a function is applied in turn to each item in a list, updating an
+%accumulator value for each one.
+%The final value of the computation is the value of the accumulator after each
+%item has been folded over.
+%
+%In our work, we define a simple language that performs arithmetic computations
+%on scalar values and angles, and evolve different functions to use in the fold.
+%To make the evolutionary process fast enough, we first evaluate different
+%functions in a small environment, with six neighbors that start in a circle
+%around a single influencing agent.
+%We run four trials; in each trial, the six neighbors (and the influencing agent)
+%are facing one of the cardinal directions, and the target direction is east.
+%We measure the average angle offset from the goal direction of the flocking
+%agents after $100$ steps and take the average across the four trials as the
+%fitness value for the proposed program.
+%We then run the evolutionary algorithm on this fitness value and mutate the
+%best candidates each generation.
+%
+%Next, we evaluate the candidates generated by the evolutionary algorithm against
+%a larger setting drawn from the literature.
+%To help organize this part of the analysis, we split influencing agent design
+%into three different aspects: placement strategy, local behaviors, and global
+%behaviors.
+%Placement strategies refer to the initial placement of influencing agents in
+%the simulation space and their placement relative to flocking agents.
+%Local behaviors dictate how an influencing agent attempts to influence local
+%neighbors to face a given goal direction.
+%These are equivalent to the ad hoc behaviors that we are evolving, and we use
+%our evolved ad hoc behaviors for this aspect of the broader analysis.
+%Global behaviors, on the other hand, dictate how influencing agents determine
+%their goal direction.
+%For example, we might program all the influencing agents to have a
+%pre-determined goal direction such as East or South, or we might program a
+%global behavior that picks a goal direction after some time based on the
+%initial dynamics of the simulation.
+%
+%We take placement strategies and global behaviors from previous literature and
+%evaluate their efficacy in a larger test setting, also drawn from the
+%literature.
+%In this setting, proposed in previous work \cite{Fu2017}, the agents start out
+%in a $1000x1000$ toroidal grid, and the simulation is run until half the agents
+%converge to one direction.
+%In this setting, agent density is low, so interactions are rare.
+%However, flock formation is still provably guaranteed, so the metric of interest
+%is how much faster the influencing agents can help the Reynolds-Viscek agents
+%reach convergence.
+%Previous work found that in low-density settings, it is important for agents to
+%maintain influence over time; behaviors designed to quickly encourage
+%convergence tended to turn influencing agents in directions that took them away
+%from the flock.
+%
+%We find that the genetic behaviors can both encourage faster convergence in the
+%short term while still maintaining influence over the long-term.
+%As a result, they can outperform the best hand-constructed algorithms in small
+%simulation spaces while not falling to the common pitfalls of the larger
+%simulation spaces.
+%However, they can also be difficult to understand and reason about.
+%In particular, some genetic behaviors work very well when paired with certain
+%global behaviors, but experience catastrophic failures when paired with other
+%global behaviors.
+%
+%The main contributions of this work are:
+%\begin{itemize}
+%    \item A functional language to define ad hoc influencing agent behaviors.
+%    \item An evolutionary algorithm to evolve and evaluate candidate programs in
+%    this language.
+%    \item Analysis of the efficacy of the programs evolved by this algorithm and
+%    their strengths and shortcomings relative to hand-constructed algorithms.
+%\end{itemize}
+%
+%The rest of this paper is organized as follows: \S\ref{sec:related} discusses
+%recent work in this area and how it relates to our work.
+%\S\ref{sec:problem} describes the formal flocking model and the role of
+%influencing agents.
+%\S\ref{sec:evolving} discusses our domain-specific language and evolutionary
+%algorithm.
+%\S\ref{sec:evaluation} describes our experimental setup in more detail, and
+%presents the results of our experiments.
+%Finally, we conclude and discuss future work in \S\ref{sec:conclusion}.
 
