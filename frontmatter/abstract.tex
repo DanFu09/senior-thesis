@@ -1,6 +1,43 @@
 %!TEX root = ../dissertation.tex
 % the abstract
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
+Flocking is a coordinated collective behavior that results from local sensing
+between individual agents who have a tendency to orient towards each other.
+Flocking is common amongst animal groups and could also be useful in robotic
+swarms.
+In the interest of learning how to control flocking behavior, several pieces
+of recent work in the multiagent systems literature have explored the use of
+influencing agents for guiding flocking agents to face a target direction.
+However, the existing work in this domain has focused on simulation settings
+of small areas with toroidal shapes.
+In such settings, agent density is high, so interactions are common, and
+flock formation occurs easily.
+In our work, we study new environments with lower agent density, wherein
+interactions are more rare.
+We study the efficacy of placement strategies and influencing agent behaviors
+drawn from the literature, and find that the behaviors that have been shown to
+work well in high-density conditions tend to be much less effective in the
+environments we introduce.
+The source of this ineffectiveness is a tendency of influencing agents explored
+in prior work to face directions intended for maximal influence that actually
+separate the influencing agents from the flock.
+We find that in low-density conditions maintaining a connection to the flock is
+more important than rushing to orient towards the desired direction.
 
-Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.
+We use these insights to propose new placement strategies and influencing agent
+behaviors that overcome the difficulties posed by our new environments.
+The best influencing agents we identify act like normal members of the flock to
+achieve positions that allow for control, and then exert their influence.  
+We dub this strategy ``follow-then-influence.''
+
+We also tackle this problem by using genetic programming to evolve ad hoc
+behaviors for influencing agents.
+We use a hand-constructed domain-specific language and evolve populations in
+a small test environment, before testing the best candidates in larger
+scenarios.
+We find that the genetic behaviors do well both in small-scale and large-scale
+simulations, a property that does not hold of the other hand-constructed
+behaviors [NEED TO RUN SIMULATIONS TO MAKE SURE THIS IS TRUE].
+In particular, the genetic behaviors strike a balance between quickly turning
+their neighbors towards the goal direction while not losing influence by
+flying away from their neighbors.

@@ -2,16 +2,79 @@
 \chapter{Conclusion}
 \label{conclusion}
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
+\section{Barbara Conclusion}
+We have studied the problem of controlling flocks using influencing agents
+under two new, more adversarial environments with lower agent density, and
+have introduced some novel behaviors and placement strategies for these settings.
+Besides these new algorithms, we have found that, in low-density
+environments it is more important for influencing agents to
+\textit{maintain influence} than it is for them to rapidly turn their
+neighbors towards the correct destination.
+As a result, earlier results from smaller simulation environments often do
+not hold in the environments we introduce.
+We have found that a multistage approach that first embeds influencing
+agents in small flocks before attempting to steer these flocks to the goal
+direction can be effective in addressing some of these shortcomings.
 
-Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.
+Future work could explore the design space of placement strategies and agent
+behaviors by applying machine learning techniques to this problem.
+Future work could also explore how to aggregate small flocks into one larger
+flock.
+Many of our behaviors result in multiple small flocks clustered around
+influencing agents that have converged in the sense that they are all facing the
+same direction, but remain disconnected from each other.
+An interesting challenge would be to develop algorithms to merge small flocks that
+start out with the same orientation, while maintaining flock composition.
+For this challenge, a successful algorithm for an influencing agent must change
+the direction of the flock without losing individual Reynolds-Viscek agents on
+the edge of the flock.
 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis.
+\section{Radhika Conclusion}
+In this paper, we have presented an evolutionary algorithm that evolves
+ad hoc algorithms for influencing agents to control flocks of birds.
+We evolved a genome based on a hand-constructed domain-specific language
+and found that many of the evolutionary algorithms incorporated non-trivial
+insights about the best way to be successful in a wide range of settings.
+However, we also found that the evolved behaviors could be difficult to 
+parse and somewhat unpredictable, especially when used as parts of more
+complicated behaviors.
 
-Cras sed ante. Phasellus in massa. Curabitur dolor eros, gravida et, hendrerit ac, cursus non, massa. Aliquam lorem. In hac habitasse platea dictumst. Cras eu mauris. Quisque lacus. Donec ipsum. Nullam vitae sem at nunc pharetra ultricies. Vivamus elit eros, ullamcorper a, adipiscing sit amet, porttitor ut, nibh. Maecenas adipiscing mollis massa. Nunc ut dui eget nulla venenatis aliquet. Sed luctus posuere justo. Cras vehicula varius turpis. Vivamus eros metus, tristique sit amet, molestie dignissim, malesuada et, urna.
+In the future, we plan on conducting a more thorough analysis of these
+genetic behaviors in a wider range of evaluation settings.
+We also wish to explore the design space of genetic algorithms more deeply
+by evolving behaviors over different genomes, such as neural networks.
+Another promising direction of research is to co-evolve different aspects
+of influencing agent behavior to help agents co-ordinate in previously
+unexpected ways.
+Finally, we could also explore the design space in a different way by
+taking techniques from reinforcement learning.
 
-Cras dictum. Maecenas ut turpis. In vitae erat ac orci dignissim eleifend. Nunc quis justo. Sed vel ipsum in purus tincidunt pharetra. Sed pulvinar, felis id consectetuer malesuada, enim nisl mattis elit, a facilisis tortor nibh quis leo. Sed augue lacus, pretium vitae, molestie eget, rhoncus quis, elit. Donec in augue. Fusce orci wisi, ornare id, mollis vel, lacinia vel, massa.
+% \section {Future work}
+% \label{sec:future}
+% The existing literature studying influencing agents in flocks has almost
+% exclusively focused on a simplified version of the Reynolds flocking model.
+% In short, the simplified model assumes that the only inter-agent dynamics in
+% play are alignment dynamics - agents tend to align their velocity vectors with
+% neighboring agents.
+% The original Reynolds model also includes avoidance and cohesion dynamics -
+% agents will try not to collide with other agents, and agents will tend towards
+% the center position of a group.
+% These dynamics are important in real flocks, and in the future, the effects of
+% initializing the cohesion and avoidance assumptions in Reynolds' flocking model
+% should be explored.
+% We briefly tested flocks with cohesion and avoidance dynamics throughout the
+% course of our work and observed a major change in flocking dynamics when we did
+% so.
+% In particular, the introduction of cohesion and avoidance dynamics allows the
+% system to be stable in an oscillatory state.
+% This discourages flock formation and makes the problem significantly more
+% difficult.
+% Careful analysis of the effects of cohesion and avoidance is required to
+% develop new metrics and influencing agent behaviors.
 
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat condimentum. Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla libero. Vivamus pharetra posuere sapien. Nam consectetuer. Sed aliquam, nunc eget euismod ullamcorper, lectus nunc ullamcorper orci, fermentum bibendum enim nibh eget ipsum. Donec porttitor ligula eu dolor. Maecenas vitae nulla consequat libero cursus venenatis. Nam magna enim, accumsan eu, blandit sed, blandit a, eros.
-
-Quisque facilisis erat a dui. Nam malesuada ornare dolor. Cras gravida, diam sit amet rhoncus ornare, erat elit consectetuer erat, id egestas pede nibh eget odio. Proin tincidunt, velit vel porta elementum, magna diam molestie sapien, non aliquet massa pede eu diam. Aliquam iaculis. Fusce et ipsum et nulla tristique facilisis. Donec eget sem sit amet ligula viverra gravida. Etiam vehicula urna vel turpis. Suspendisse sagittis ante a urna. Morbi a est quis orci consequat rutrum. Nullam egestas feugiat felis. Integer adipiscing semper ligula. Nunc molestie, nisl sit amet cursus convallis, sapien lectus pretium metus, vitae pretium enim wisi id lectus. Donec vestibulum. Etiam vel nibh. Nulla facilisi. Mauris pharetra. Donec augue. Fusce ultrices, neque id dignissim ultrices, tellus mauris dictum elit, vel lacinia enim metus eu nunc.
+% Furthermore, in \textit{herd}, we believe the \textit{multicircle transition} 
+% approach can be improved to more effectively steer flocks towards outer circles 
+% without losing agents in the process.
+% Similarly, further study of how to change the direction of an existing flock
+% can improve the efficacy of our \textit{multistep} behavior in the \textit{large};
+% perhaps a ``nudge, then follow" approach would be effective.

@@ -219,7 +219,7 @@
 	\begin{center}
 	\Huge \textcolor{SchoolColor}{\thetitle} \normalsize \\
 	\vspace{100pt}
-	\textsc{a dissertation presented \\ by\\
+	\textsc{a thesis presented \\ by\\
 	\theauthor\\ to\\ The Department of \@department\\
 	\vspace{12pt}
 	in partial fulfillment of the requirements\\

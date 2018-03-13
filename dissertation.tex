@@ -4,6 +4,14 @@
 
 \documentclass{Dissertate}
 
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{url}
+
 \begin{document}
 
 % the front matter
@@ -20,6 +28,7 @@
 % \acknowledgments
 
 % \doublespacing
+\graphicspath{{figures/}}
 
 % include each chapter...
 \setcounter{chapter}{-1}  % start chapter numbering at 0
@@ -27,6 +36,9 @@
 \include{chapters/chapter1}
 \include{chapters/chapter2}
 \include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+\include{chapters/chapter6}
 \include{chapters/conclusion}
 
 \setstretch{\dnormalspacing}
