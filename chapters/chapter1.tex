@@ -7,8 +7,6 @@ Nulla facilisi. In vel sem. Morbi id urna in diam dignissim feugiat. Proin moles
 \chapter{Background and Related Work}
 \label{ch:background}
 
-%\newthought{There's something to be said} for having a good opening line.
-
 \section{Previous Work by Genter and Stone}
 Our work strongly builds upon the work of Genter and Stone, who have recently
 published a series of papers on the best way to influence an existing flock to
@@ -74,70 +72,26 @@ As a result, many subsequent studies that build off the Reynolds or Vicsek
 models, including the studies of Genter and Stone, only study the alignment
 portion.
 
-TALK ABOUT REYNOLDS, VISCEK MODEL
+Jadbadbaie et. al. \cite{jad2003convergence} have studied this model from an
+analytical perspective.
+Two strong results from this work are that a group of Reynolds-Viscek agents
+in a toroidal setting will eventually converge regardless of initial
+conditions, and that in the presence of a single agent with fixed orientation
+(analogous to a single influencing agent), all the agents will converge to that
+fixed agent's orientation.
+This provides important context for Genter and Stone's work and the work that
+we present here; when the setting is toroidal, convergence is guaranteed, so
+the interesting question how fast we can reach convergence.
 
-THEN TALK ABOUT INFLUENCING AGENTS: COUZIN, IN MORE DETAIL
-
-THEN ALL THE OTHER INFLUENCING AGENT STRATEGIES
-
-\section{Genetic Programming}
-\label{sec:relatedgenetic}
-REWRITE THIS SECTION IN MY VOICE
-
-We are also not the first researchers to apply genetic algorithms to the domain
-of controlling agents in swarms; Dorigo and Trianni used genetic algorithms to
-evolve controllers for s-bots, swarming robots designed to self-assemble and
-move together as a swarm-bot \cite{DorigoSwarmBot}.
-However the problem solved in that research is not the same as the problem we
-attempt to solve.
-In the swarm-bot project, the evolved controllers ran cooperatively on every
-agent in the swarm, whereas our controllers only run on a minority of the
-agents yet still need to influence the collective behavior of the swarm.
-Another key difference is that Dorigo and Trianni used a neural network
-connecting the sensors to the actuators of their robots as their genome,
-whereas we draw on the genetic programming literature to evolve controlling
-programs that are able to handle varying amounts of input data and display
-arbitrarily complex behaviors.
-
-Another use of genetic algorithms for developing controllers was when Sean Luke
-used genetic programming to build a team for the RoboCup97 competition
-\cite{lukeRoboCup97}.
-Like us, Luke used genetic programming with a domain specific language designed
-based on domain intuition, however his language had many more primitives than
-ours because the virtual soccer players he was evolving were capable of much
-more complex behaviors than our flocking agents.
-The execution model used by the RoboCup players was designed to simplify the
-work to be done by the evolved program without unnecessarily biasing it toward
-any particular strategy.
-We have similar goals when designing our own execution model and language.
-
-Much work has been done on developing techniques for evolving programs in
-richer languages with complex constraints on which programs are valid
-\cite{BriggsGP}.
-Although we use functional programming ideas in our execution model, we keep
-our language simple, with only conditional expressions for control flow
-structures and only a single type.
-Exploring a richer language with a type system to reduce the number of useless
-programs our genetic algorithm searches would be very interesting, but we leave
-it as future work.
-
-\section{Barbara Related Work}
-Our work builds mainly upon the work of Genter and Stone, who have recently
-published a series of papers on the best way to influence an existing flock to
-change direction \cite{genter2015placement, genter2014neighborsorientherd,
-genter2013visionstationary, genter2013backsearch,
-genter2016facegoalfacecurrent, genter201612steplookahead}.
-This prior literature has studied a number of placement strategies and
-influencing agent behaviors, including questions of how best to join or leave a
-flock in real scenarios.
-Genter's PhD thesis also presents results from simulations with a slightly
-different implementation of Reynold's flocking model, as well as physical
-experiments with these algorithms in a small RoboCup setting.
-This prior literature has almost exclusively studied small environments, where
-density of agents is high, and quick flock formation is virtually guaranteed.
-In our work, we study two new low-density environments and introduce new
-placement strategies and influencing agent behaviors to adapt to the
-difficulties presented by these new environments.
+Couzin et. al. \cite{couzin2005} have studied the design of influencing agents
+for flocking as well, albeit with a slightly different model.
+They have proposed an influencing behavior wherein influencing agents adopt
+orientations ``in between" their desired goal orientation and the orientations
+of their neighbors, in order to still influence their neighbors while not
+adopting orientations so extreme that they have no chance of being effective in
+the long term.
+In \S\label{ch:influencing}, we adapt this algorithm to the Reynolds-Vicsek
+flocking model to see how well it performs in our settings.
 
 Han et. al. have \cite{han2010teleporting} published a series of papers showing
 how to align a group of agents in the same direction.
@@ -152,16 +106,6 @@ that our results will be more applicable to real applications; we suspect that
 influencing agents that act similarly to real birds will be more successful in
 real-world applications.
 
-Jadbadbaie et. al. \cite{jad2003convergence} have studied variations on the
-Reynolds flocking model from an analytical perspective, with no influencing
-agents.
-A strong result from this literature is that a group of Reynolds-Viscek agents
-in a toroidal setting will eventually converge regardless of initial
-conditions.
-However, there has been less analytical work on the speed of flock formation,
-and very little on the use of influencing agents to speed up flock formation or
-to force flocks to face given directions.
-
 Su. et. al. \cite{su2009virtualleaderinformed} have also studied the question
 of flock formation and convergence, but have studied the question in the
 context of the Olfati-Saber flocking model
@@ -173,18 +117,6 @@ control over the other agents based on its status.
 In our work, we assume that influencing agents do not have any special
 interaction rules with Reynolds-Viscek agents.
 
-Couzin et. al. \cite{couzin2005} have studied this question with a slightly
-different formulation, and with a different model of flocking behavior.
-In their model, flocking behavior is achieved by maintaining distance between
-neighbors, and they cast the problem as one of informed individuals (analogous
-to influencing agents) trying to change the trajectory of the flock.
-The informed individuals are not externally-controlled; they simply have
-information about the ``correct" orientation.
-In particular, the informed individuals can be wrong or have different opinions
-than other individuals, so information transfer is key.
-This differs from the settings we study, where influencing agents are
-completely autonomous and agree on a goal direction.
-
 Other researchers have tackled this question with real flocking agents.
 Halloy et. al. \cite{Halloy2007} have used robotic influencing agents to move
 cockroaches to areas they would otherwise avoid.
@@ -201,95 +133,68 @@ The dynamics in this case are very different from the models we study; when the
 ducks are on the ground, they can stand still, for instance, and the fence
 limits the ducks' behavior.
 
-\section{Radhika Related Work}
-\subsection{Flocking}
-\label{sec:relatedflocking}
-Our work builds mainly upon the work of Genter and Stone, who have recently
-published a series of papers on the best way to influence an existing flock to
-change direction \cite{genter2015placement, genter2014neighborsorientherd,
-genter2013visionstationary, genter2013backsearch,
-genter2016facegoalfacecurrent, genter201612steplookahead}.
-This prior literature has studied a number of placement strategies and influencing
-agent behaviors, including questions of how best to join or leave a flock in real
-scenarios.
-Genter's PhD thesis also presents results from simulations with a slightly
-different implementation of Reynold's flocking model, as well as physical
-experiments with these algorithms in a small RoboCup setting.
-This prior literature has exclusively studied hand-constructed placement
-strategies and behaviors.
-In our work, we present first steps towards automating the design process by
-evolving local components of influencing agent behaviors.
+\section{Genetic Programming}
+Genetic programming \cite{kozaGP} uses evolutionary algorithms to explore the
+solution space of possible programs to optimize some metric.
+Common to all genetic programming techniques is some sort of genome that can be
+evolved over; in our work, this is a hand-designed domain-specific language
+that takes a list of neighbors as input and outputs an orientation for the
+influencing agent to face.
+We directly evolve the programs that define our influencing agents' behavior.
+Other choices for genome include neural networks or other data structures that
+can take the relevant input and generate a desired output; we do not explore
+these in our work.
 
-We also draw from previous work that studied Genter and Stone's algorithms in
-low-density settings and proposed new algorithms to deal with the issues
-introduced by low-density settings \cite{Fu2017}.
-This previous work showed that, in low-density settings, maintaining influence
-was of paramount importance.
-In our work, we draw from the settings and behaviors presented in the previous
-work to conduct a full analysis of our genetic behaviors.
+The evolutionary algorithms themselves can vary in specifics, but they all
+require some mutation function and fitness function, and sometimes a crossover
+function.
+A mutation function takes a genome and ``mutates" it in some way to produce
+another genome.
+In our work, this can happen by changing the value of a constant or a function
+somewhere in the abstract syntax tree; in a genome defined by a neural network,
+this can take the shape of changing the weights between some number of nodes.
+The fitness function is used to evaluate individual genomes; each generation,
+the output from the fitness function is used to select some number of genomes
+to mutate or carry on into the next generation (survival of the fittest).
+Finally, some evolutionary algorithms, including ours, use a crossover function
+that takes two genomes and creates a new one from aspects of both (to simulate
+sexual reproduction).
 
-Han et. al. have \cite{han2010teleporting} published a series of papers showing how
-to align a group of agents in the same direction.
-This literature has assumed a single influencing agent with infinite speed, and
-has used this property to construct a behavior that has the influencing agent
-fly around and correct the orientation of agents one at a time.
-The result is that the Reynolds-Viscek agents all eventually converge to the target
-direction, but are not connected to each other.
-In our work, we limit the speed of influencing agents to be the same as the
-Reynolds-Viscek agents to prevent the use of behaviors like this, and in hopes
-that our results will be more applicable to real applications; we suspect that
-influencing agents that act similarly to real birds will be more successful in
-real-world applications.
-Furthermore, we limit our genetic behaviors to only consider stimuli in an
-influencing agent's neighborhood.
-However, we are hopeful that, with more work, genetic programming techniques
-can help develop behaviors for models that work under different situations and
-assumptions.
+We are not the first researchers to apply genetic algorithms to the domain
+of controlling agents in swarms; Dorigo and Trianni used genetic algorithms to
+evolve controllers for s-bots, swarming robots designed to self-assemble and
+move together as a swarm-bot \cite{DorigoSwarmBot}.
+Their problem formulation is slightly different than ours, however.
+In their project, they have complete control over every agent in the swarm;
+the goal of their genetic algorithm is to produce a program that can create
+collective behavior when run on every agent.
+In our work, we only have control over a limited number of influencing agents.
+In their work, Dorigo and Trianni use a neural network from sensors to the
+actuators of their robots as their genome.
+Although it would be interesting to apply this approach to our problem, we do
+not do so in this work.
 
-Jadbadbaie et. al. \cite{jad2003convergence} have studied variations on the
-Reynolds flocking model from an analytical perspective, with no influencing agents.
-A strong result from this literature is that a group of Reynolds-Viscek agents in
-a toroidal setting will eventually converge regardless of initial conditions.
-However, there has been less analytical work on the speed of flock formation, and
-very little on the use of influencing agents to speed up flock formation or to
-force flocks to face given directions.
+Instead, we use genetic programming over a domain specific language designed
+with domain expertise.
+This is similar in approach to Sean Luke's use of genetic programming to build
+a team for the RoboCup97 competition \cite{lukeRoboCup97}.
+One major difference is that our language is simpler than his, since the
+virtual soccer players are capable of much more complex behaviors than our
+flocking agents.
+As a result, his language contained many mroe primitives than the one we
+present in our work.
+The execution model used by the RoboCup players was designed to simplify the
+work to be done by the evolved program without unnecessarily biasing it toward
+any particular strategy.
+We have similar goals when designing our own execution model and language.
 
-Su. et. al. \cite{su2009virtualleaderinformed} have also studied the question of
-flock formation and convergence, but have studied the question in the context of
-the Olfati-Saber flocking model \cite{olfati2006virtualleaderinformed}.
-This model assumes the existence of a single virtual leader that non-influencing
-agents know about.
-The virtual leader plays the role of an influencer here, but has special control
-over the other agents based on its status.
-In our work, we assume that influencing agents do not have any special
-interaction rules with Reynolds-Viscek agents.
-
-Couzin et. al. \cite{couzin2005} have studied this question with a slightly
-different
-formulation, and with a different model of flocking behavior.
-In their model, flocking behavior is achieved by maintaining distance between
-neighbors, and they cast the problem as one of informed individuals (analogous to
-influencing agents) trying to change the trajectory of the flock.
-The informed individuals are not externally-controlled; they simply have
-information about the ``correct" orientation.
-In particular, the informed individuals can be wrong or have different opinions
-than other individuals, so information transfer is key.
-This differs from the settings we study, where influencing agents are completely
-autonomous and agree on a goal direction.
-
-Other researchers have tackled this question with real flocking agents.
-Halloy et. al. \cite{Halloy2007} have used robotic influencing agents to move
-cockroaches to areas they would otherwise avoid.
-Cockroaches display flocking behavior, but with very different models from the
-one that we study.
-In this case, Halloy et. al. have exploited the cockroaches' inability to
-differentiate between real cockroaches and the robotic influencing agents.
-
-Vaughan et. al. \cite{vaughan98} have used robotic influencing agents to herd
-a flock of ducks (on the ground) to a goal position in a small caged area.
-The approach here largely uses the robot agents to ``push" the ducks from a
-distance, like a dog herding sheep.
-The dynamics in this case are very different from the models we study; when the
-ducks are on the ground, they can stand still, for instance, and the fence
-limits the ducks' behavior.
+Much work has been done on developing techniques for evolving programs in
+richer languages with complex constraints on which programs are valid
+\cite{BriggsGP}.
+Although we use functional programming ideas in our execution model, we keep
+our language simple, with only conditional expressions for control flow
+structures and only a single type.
+Exploring a richer language with a type system to reduce the number of useless
+programs our genetic algorithm searches would be very interesting, but we leave
+it as future work.
 
