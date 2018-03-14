@@ -5,6 +5,7 @@ Nulla facilisi. In vel sem. Morbi id urna in diam dignissim feugiat. Proin moles
 \end{savequote}
 
 \chapter{Results}
+\label{ch:results}
 
 \section{Barbara Results}
 \subsection{No Influencing Agents}
@@ -17,10 +18,10 @@ Figure $\ref{fig:no_adhoc}$ shows graphs of these values over time for our two
 settings.
 \begin{figure}
     \centering
-    \includegraphics[height=0.19\textwidth]{largeflockNoLegend}
-    \includegraphics[height=0.19\textwidth]{largeloneNoLegend}
-    \includegraphics[height=0.19\textwidth]{herdflockNoLegend}
-    \includegraphics[height=0.19\textwidth]{herdloneWithLegend}
+    \includegraphics[height=0.49\textwidth]{largeflockNoLegend}
+    \includegraphics[height=0.49\textwidth]{largeloneNoLegend}
+    \includegraphics[height=0.49\textwidth]{herdflockNoLegend}
+    \includegraphics[height=0.49\textwidth]{herdloneWithLegend}
    % \begin{subfigure}[b]{0.24\textwidth}
    %     \includegraphics[width=\textwidth]{largeflockNoLegend}
    %     \label{fig:largeflock}
@@ -85,7 +86,7 @@ numbers of influencing agents were similar (the major difference being that
 when there are more influencing agents, convergence happens faster).
 Note that smaller is better in these graphs.
 \begin{figure}
-    \includegraphics[width=0.75\textwidth]{large}
+    \includegraphics[width=\textwidth]{large}
     \caption{Average times to 50\% convergence for $300$ Reynolds-Viscek agents
     with $50$ influencing agents in the \textit{large} setting under different
     placement strategies, paired with various global and local behaviors.
@@ -111,7 +112,7 @@ change the direction of neighboring Reynolds-Viscek agents.
 The \textit{one step lookahead} and \textit{coordinated} behaviors underperform
 here because they tend to send influencing agents away from neighboring agents.
 \begin{figure}
-    \includegraphics[width=0.48\textwidth]{losing_influence}
+    \includegraphics[width=\textwidth]{losing_influence}
     \caption{An example of an influencing agent losing influence under the
     \textit{one step lookahead} behavior.
     The influencing agent is shown in red, and the Reynolds-Viscek agents are
@@ -385,9 +386,9 @@ over the course of the next $100$ steps.
 A few screenshots of this process are shown in Figure $\ref{fig:g1}$.
 \begin{figure}
     \centering
-    \includegraphics[width=0.15\textwidth]{westgenetic01}
-    \includegraphics[width=0.15\textwidth]{westgenetic02}
-    \includegraphics[width=0.15\textwidth]{westgenetic03}
+    \includegraphics[width=0.32\textwidth]{westgenetic01}
+    \includegraphics[width=0.32\textwidth]{westgenetic02}
+    \includegraphics[width=0.32\textwidth]{westgenetic03}
     \caption{Screenshots of the G1 local behavior when trying to turn $6$
     Reynolds-Viscek agents $180$ degrees to the east.
     Instead of trying to turn all $6$ neighbors at once, as the \textit{one step

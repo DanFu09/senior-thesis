@@ -5,12 +5,54 @@ Nulla facilisi. In vel sem. Morbi id urna in diam dignissim feugiat. Proin moles
 \end{savequote}
 
 \chapter{Background and Related Work}
+\label{ch:background}
 
 %\newthought{There's something to be said} for having a good opening line.
 
 \section{Previous Work by Genter and Stone}
-In this section, talk about previous work by Genter and Stone; discuss their
-settings and algorithms, and present some of their results.
+Our work strongly builds upon the work of Genter and Stone, who have recently
+published a series of papers on the best way to influence an existing flock to
+change direction \cite{genter2015placement, genter2014neighborsorientherd,
+genter2013visionstationary, genter2013backsearch,
+genter2016facegoalfacecurrent, genter201612steplookahead}.
+This prior literature has studied a number of placement strategies and
+influencing agent behaviors, including questions of how best to join or leave
+a flock in real scenarios.
+Genter's PhD thesis also presents results from simulations with a slightly
+different implementation of Reynold's flocking model, as well as physical
+experiments with these algorithms in a small RoboCup setting.
+
+This work has studied influencing agents in a number of contexts, including
+convergence in a small setting and steering a small, dense flock around an
+obstacle.
+We are primarily interested in building upon the work from the former context,
+although the second context is still interesting.
+In their experiments, Genter and Stone place $180$ flocking agents and $20$
+influencing agents on a $150\times150$ toroidal grid, and let agents influence
+each other if they are in a neighborhood radius of $20$ units or less from each
+other.
+As a result, they simulate the dynamics of an extremely high-density flock.
+In our work, we introduce new settings to study dynamics in low-density flocks.
+We will introduce the formal flocking model and discuss Genter and Stone's
+placement strategies and algorithms in more detail in \S\ref{ch:problem} and
+\S\ref{ch:influencing}, but we will summarize Genter and Stone's key results
+here to help situate our results.
+
+Genter and Stone introduce a number of behaviors for influencing agents and
+compare them against two baselines: \textit{face} and \textit{offset momentum}.
+In \textit{face}, influencing agents simply face a predetermined goal direction
+at all times; in \textit{offset momentum}, influencing agents look at their
+neighbors, calculate an average velocity vector, and choose a direction to
+offset that velocity from the predetermined goal direction.
+The most promising behavior they study is \textit{one step lookahead}; in this
+behavior, influencing agents cycle through choices for every direction they
+can take, and simulate one step of their neighbors for every choice they take.
+The agents pick the choice that minimizes the average difference of their
+neighbors from the goal direction.
+Not surprisingly, \textit{one step lookahead} beats the baseline behaviors in
+their experiments.
+We will see that this is not the case in low-density settings and discuss the
+reasons behind this surprising shift in \S\ref{ch:results}.
 
 \section{Other Related Work in Flocking}
 Talk about all the other related work.
