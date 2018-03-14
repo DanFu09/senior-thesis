@@ -55,10 +55,71 @@ We will see that this is not the case in low-density settings and discuss the
 reasons behind this surprising shift in \S\ref{ch:results}.
 
 \section{Other Related Work in Flocking}
-Talk about all the other related work.
+There is a rich history of work studying flocking, much of it concentrating on
+flocking models originally proposed by Reynolds \cite{reynoldsmodel} and,
+independently, Vicsek \cite{vicsek1995}.
+The classical Reynolds model identifies three properties necessary for
+flocking:
+\begin{itemize}
+    \item Alignment: a tendency for flocking agents to steer towards the
+            average heading of their neighbors
+    \item Avoidance: a tendency for flocking agents to avoid collisions with
+            their neighbors
+    \item Cohesion: a tendency for flocking agents to steer towards the average
+            position of their neighbors
+\end{itemize}
+\noindent Separately, Vicsek proposed a flocking model mathematically
+equivalent to the alignment portion of the Reynolds model.
+As a result, many subsequent studies that build off the Reynolds or Vicsek
+models, including the studies of Genter and Stone, only study the alignment
+portion.
+
+TALK ABOUT REYNOLDS, VISCEK MODEL
+
+THEN TALK ABOUT INFLUENCING AGENTS: COUZIN, IN MORE DETAIL
+
+THEN ALL THE OTHER INFLUENCING AGENT STRATEGIES
 
 \section{Genetic Programming}
-Talk about related work in GP
+\label{sec:relatedgenetic}
+REWRITE THIS SECTION IN MY VOICE
+
+We are also not the first researchers to apply genetic algorithms to the domain
+of controlling agents in swarms; Dorigo and Trianni used genetic algorithms to
+evolve controllers for s-bots, swarming robots designed to self-assemble and
+move together as a swarm-bot \cite{DorigoSwarmBot}.
+However the problem solved in that research is not the same as the problem we
+attempt to solve.
+In the swarm-bot project, the evolved controllers ran cooperatively on every
+agent in the swarm, whereas our controllers only run on a minority of the
+agents yet still need to influence the collective behavior of the swarm.
+Another key difference is that Dorigo and Trianni used a neural network
+connecting the sensors to the actuators of their robots as their genome,
+whereas we draw on the genetic programming literature to evolve controlling
+programs that are able to handle varying amounts of input data and display
+arbitrarily complex behaviors.
+
+Another use of genetic algorithms for developing controllers was when Sean Luke
+used genetic programming to build a team for the RoboCup97 competition
+\cite{lukeRoboCup97}.
+Like us, Luke used genetic programming with a domain specific language designed
+based on domain intuition, however his language had many more primitives than
+ours because the virtual soccer players he was evolving were capable of much
+more complex behaviors than our flocking agents.
+The execution model used by the RoboCup players was designed to simplify the
+work to be done by the evolved program without unnecessarily biasing it toward
+any particular strategy.
+We have similar goals when designing our own execution model and language.
+
+Much work has been done on developing techniques for evolving programs in
+richer languages with complex constraints on which programs are valid
+\cite{BriggsGP}.
+Although we use functional programming ideas in our execution model, we keep
+our language simple, with only conditional expressions for control flow
+structures and only a single type.
+Exploring a richer language with a type system to reduce the number of useless
+programs our genetic algorithm searches would be very interesting, but we leave
+it as future work.
 
 \section{Barbara Related Work}
 Our work builds mainly upon the work of Genter and Stone, who have recently
@@ -232,41 +293,3 @@ The dynamics in this case are very different from the models we study; when the
 ducks are on the ground, they can stand still, for instance, and the fence
 limits the ducks' behavior.
 
-\subsection{Genetic Programming}
-\label{sec:relatedgenetic}
-We are not the first researchers to apply genetic algorithms to the domain of
-controlling agents in swarms; Dorigo and Trianni used genetic algorithms to
-evolve controllers for s-bots, swarming robots designed to self-assemble and
-move together as a swarm-bot \cite{DorigoSwarmBot}.
-However the problem solved in that research is not the same as the problem we
-attempt to solve.
-In the swarm-bot project, the evolved controllers ran cooperatively on every
-agent in the swarm, whereas our controllers only run on a minority of the
-agents yet still need to influence the collective behavior of the swarm.
-Another key difference is that Dorigo and Trianni used a neural network
-connecting the sensors to the actuators of their robots as their genome,
-whereas we draw on the genetic programming literature to evolve controlling
-programs that are able to handle varying amounts of input data and display
-arbitrarily complex behaviors.
-
-Another use of genetic algorithms for developing controllers was when Sean Luke
-used genetic programming to build a team for the RoboCup97 competition
-\cite{lukeRoboCup97}.
-Like us, Luke used genetic programming with a domain specific language designed
-based on domain intuition, however his language had many more primitives than
-ours because the virtual soccer players he was evolving were capable of much
-more complex behaviors than our flocking agents.
-The execution model used by the RoboCup players was designed to simplify the
-work to be done by the evolved program without unnecessarily biasing it toward
-any particular strategy.
-We have similar goals when designing our own execution model and language.
-
-Much work has been done on developing techniques for evolving programs in
-richer languages with complex constraints on which programs are valid
-\cite{BriggsGP}.
-Although we use functional programming ideas in our execution model, we keep
-our language simple, with only conditional expressions for control flow
-structures and only a single type.
-Exploring a richer language with a type system to reduce the number of useless
-programs our genetic algorithm searches would be very interesting, but we leave
-it as future work.
