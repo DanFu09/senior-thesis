@@ -8,8 +8,8 @@ This is some random quote to start off the chapter.
 \label{ch:problem}
 
 \section{Flocking Model}
-Like other studies in the literature, we use a simplified version of Reynold's
-Boid algorithm \cite{reynoldsmodel} to model the flock.
+We use a simplified version of Reynold's Boid algorithm \cite{reynoldsmodel}
+to model the flock.
 In this simplified model, also proposed independently by Vicsek and
 collaborators \cite{vicsek1995},
 agents change their alignment at every step to be similar to the average
@@ -31,21 +31,35 @@ where $\text{calcDiff}$ computes the difference between two angles, always
 returning an angle between $0$ and $\pi$.
 
 \section{Influencing Agents}
-Should probably describe influencing agents and their limitations at a high
-level here; look at introduction of the influencing agents section from Barbara
-paper, or the influencing agents subsection from the Radhika paper
+We can change flock dynamics by introducing influencing agents that we control.
+We refer to non-influencing agents as Reynolds-Viscek agents.
+We do not give the influencing agents any special control over Reynolds-Viscek
+agents; we simply let the latter interact with influencing agents using the
+same local sensing rules as with any other agent.
+We also limit the influencing agents to have the same speed as Reynolds-Viscek
+agents, both to help the influencing agents ``blend in" in real applications
+and to conform to the Genter and Stone experiments.
+We let the influencing agents have a sensing radius of twice the normal
+neighborhood radius.
+This allows for more complex behaviors like \textit{one step lookahead}
+without requiring a global view from the influencing agent.
+In some cases, the influencing agents can communicate with each other, but
+they do not need global GPS.
 
-\section{New Settings}
-Previous work has studied influencing agents in a small toroidal $150\times150$
-grid, with neighborhood radius $r=20$~\cite{genter2016facegoalfacecurrent,
-genter201612steplookahead}.
-In this work, we study low-density dynamics by introducing two new settings
-that are more adverse to flock formation; we call these new settings the
-\textit{large} setting and the \textit{herd} setting.
+We study influencing agents in three settings in this work.
+First is the setting used in previous work by Genter and Stone; this setting
+is a small toroidal $150\times150$ grid, with neighborhood radius $r=20$
+\cite{genter2016facegoalfacecurrent, genter201612steplookahead, genterthesis}.
+Because this grid is relatively small, and the neighborhood is relatively
+large, this simulates a very high-density flocking setting.
+In this setting, convergence is rapid, so our primary metric of interest is
+time to convergence.
+We call this setting the \textit{small} setting.
+
+In order to study low-density dynamics, we introduce two new settings that are
+more adverse to flock formation; we call these new settings the \textit{large}
+setting and the \textit{herd} setting.
 In both these settings, we set the neighborhood radius to $r=10$.
-% Before discussing these settings in detail, we note that our \textit{herd}
-% setting is unrelated to Genter and Stone's 2014 herd experiment
-% \cite{genter2014neighborsorientherd}.
 
 In the \textit{large} setting, non-influencing agents are randomly placed in a
 toroidal $1000\times1000$ grid with random initial orientations.
@@ -53,13 +67,14 @@ The larger grid size results in lower agent density; as a result, agents start
 out much farther away from other agents' neighborhoods, and interactions are
 much rarer.
 However, since the simulation space remains toroidal, convergence to a single
-flock is still provably guaranteed, so we are primarily interested in studying
-the length of time to convergence in this case [CITE THIS].
+flock is still provably guaranteed, so we are primarily interested in
+studying the length of time to convergence in this case
+\cite{jad2003convergence}.
 In the \textit{herd} setting, non-influencing agents are placed randomly in a
 circle of radius 500 whose origin lies at the center of a $5000\times5000$
 non-toroidal grid.
 When agents reach the edge of the grid, they simply keep going; in this way,
 agents can get ``lost" from the rest of the flock.
-As a result, convergence to a single flock is not guaranteed [CITE THIS].
+As a result, convergence to a single flock is not guaranteed.
 Therefore, we are interested in studying how well influencing agents can keep
 the non-influencing agents from getting lost.
