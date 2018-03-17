@@ -1,0 +1,12 @@
+Run all the small simulations, with momentum = 0
+
+Run large and herd again, with momentum = 0 just to verify that that isn't the
+root cause of this (maybe put the results in the appendix?) - DONE
+Large is basically the same, but herd is all messed up because of momentum = 0
+bug
+
+In thesis: present momentum = 0 for large and small, but momentum = 1 for herd
+Mention the bug in the MASON simulator that prevents accurate simulation of
+non-toroidal worlds, so that's why we set momentum = 1 for herd
+
+Run genetic algorithms again for momentum = 0

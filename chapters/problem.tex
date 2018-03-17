@@ -23,14 +23,23 @@ At the same time, the agents change their orientation based on the alignments
 of neighboring agents.
 Let the neighbors $N_i(t)$ be the set of agents at time $t$ that are within
 neighborhood radius $r$ of $a_i$, not including $a_i$ itself.
-At timestep $t$, each agent updates its orientation to be the average of their
-neighbors' orientations:
-\[\theta_i(t+1)=\theta_i(t)+\frac{1}{|N_i(t)|} \Sigma_{a_j \in N_i(t)}
-\text{calcDiff}(\theta_j(t),\theta_i(t)),\]
+At timestep $t$, each agent updates its orientation to turn towards the average
+of its neighbors' orientations:
+\[\theta_i(t+1)=\theta_i(t)+\frac{1}{\alpha}\frac{1}{|N_i(t)|} \Sigma_{a_j \in
+N_i(t)} \text{calcDiff}(\theta_j(t),\theta_i(t)),\]
 where $\text{calcDiff}$ computes the difference between two angles, always
 returning an angle between $0$ and $\pi$.
+The $\frac{1}{\alpha}$ term denotes a ``momentum" factor, wherein agents have
+a tendency to keep their current orientation.
+$\alpha=1$ is equivalent to no momentum; agents immediately adopt the average
+orientation of their neighbors.
+$\alpha=2$ is halfway in between; agents adopt the orientation that is halfway
+between their current orientation and the average orientation of their
+neighbors.
 
 \section{Influencing Agents}
+TODO: TALK ABOUT MOMENTUM AND WHAT WE USE FOR EACH SETTING
+
 We can change flock dynamics by introducing influencing agents that we control.
 We refer to non-influencing agents as Reynolds-Vicsek agents.
 We do not give the influencing agents any special control over Reynolds-Vicsek
