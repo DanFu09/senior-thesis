@@ -58,8 +58,8 @@ for this paper.
 For a discussion of this question, we refer the reader to Genter and Stone
 \cite{genter2016facegoalfacecurrent, genterthesis}.
 
-We use the same placement strategies for the \textit{large} and \textit{small}
-settings: \textit{random}, \textit{grid}, and \textit{k-means}.
+We use three placement strategies for the \textit{large} setting:
+\textit{random}, \textit{grid}, and \textit{k-means}.
 The random placement strategy, as its name suggests, places influencing agents
 randomly throughout the grid.
 The grid placement strategy computes a square lattice on the grid and places
@@ -72,8 +72,8 @@ This strategy finds a cluster for each influencing agent by setting $k$ equal
 to the number of influencing agents, and then places an influencing agent at
 the center of each cluster.
 
-We develop similar placement strategies for our herd setting, with some
-differences.
+We develop similar placement strategies for our \textit{herd} setting, with
+some slight modifications.
 To adapt the strategies to a circular arrangement of agents, we define each
 strategy in terms of some radius $r$ about an origin $O$, except for the
 \textit{k-means} strategy, which remains the same.
@@ -98,38 +98,49 @@ Once we have placed our influencing agents, we still need to design how they
 will work together to influence the flock.
 We call this aspect of the design influencing agent behaviors.
 In the present work we focus on decentralized ``ad-hoc" algorithms for our
-influencing agents since this class of algorithms has been the focus of the
+influencing agents, since this class of algorithms has been the focus of the
 existing multiagent systems literature on this topic
 \cite{genterthesis, genter2014neighborsorientherd, genter201612steplookahead}.
+A summary of the behaviors we investigate is shown in Table
+\ref{table:behaviors}.
 
-To help organize our analysis, we split behaviors into local and global
-components; each influencing agent behavior is composed of a local and global
-component.
-The local component takes a desired orientation as an argument and dictates
-which direction an influencing agent will face to try to influence its neighbors
-towards the goal orientation.
-The global component, on the other hand, dictates the desired orientation to
-feed to the local component and how the influencing agents might coordinate to
-decide on a desired orientation.
-For example, one behavior might be for the influencing agents to circle around
-the center of a grid and get the Reynolds-Viscek agents to circle with them.
-The global component would compute the desired orientation necessary at each
-step to maintain the circling behavior, and the local component would compute
-which exact direction to face to get the Reynolds-Viscek agents to face the
-desired orientation at that step.
-For grammatical sanity, we will refer to different candidates for local and
-global components as ``local behaviors" and ``global behaviors" throughout the
-rest of this paper; however, it is important to recognize that any actual
-behavior must have a local and global component.
+\begin{table}[]
+\footnotesize
+\centering
+\caption{Summary of the hand-designed behaviors we investigate}
+\label{table:behaviors}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Setting}       & \textbf{Type}               & \textbf{Name}        & \textbf{Description}                    \\ \hline
+\multirow{6}{*}{Large} & \multirow{3}{*}{\textbf{}}  & \textit{Face}      & Face goal        \\ \cline{3-4}
+                       &                             & \textit{Offset Momentum}      & Offset average velocity      \\ \cline{3-4}
+                       &                             & \textit{One Step Lookahead}  & Simulate one step      \\ \cline{3-4}
+                       &                             & \textit{Coordinated}      & Pair off and coordinate      \\ \cline{3-4}
+                       &                             & \textit{Couzin}      & Averaging       \\ \cline{3-4}
+                       &                             & \textit{Multistep}   & \textit{\textbf{Follow-then-influence}} \\ \hline
+        \multirow{8}{*}{Herd}  & \multirow{5}{*}{Net} & \textit{Face}      & Face goal        \\ \cline{3-4}
+                       &                             & \textit{Offset Momentum}      & Offset average velocity      \\ \cline{3-4}
+                       &                             & \textit{One Step Lookahead}  & Simulate one step      \\ \cline{3-4}
+                       &                             & \textit{Coordinated}      & Pair off and coordinate      \\ \cline{3-4}
+                       &                             & \textit{Couzin}      & Averaging       \\ \cline{2-4}
+                       & \multirow{3}{*}{Stationary} & \textit{Circle}      & Trace circle around agents              \\ \cline{3-4}
+                       &                             & \textit{Polygon}     & Trace polygon around agents             \\ \cline{3-4}
+                       &                             & \textit{Multicircle} & \textit{\textbf{Follow-then-influence}} \\ \hline
+\end{tabular}
+\end{table}
 
-\subsection{Local Behaviors}
-Like our placement strategies, we draw on Genter and Stone for many of our
-local behaviors \cite{genter201612steplookahead,genter2016facegoalfacecurrent,
-genter2015placement}.
-In previous work, they have introduced baseline behaviors \textit{face} and
-\textit{offset momentum}, as well as more sophisticated behaviors \textit{one
-step lookahead} and \textit{coordinated}.
-Each of these behaviors requires a goal angle $\theta^*$.
+\subsection{Large Setting}
+
+For the \textit{large} setting, we study four behaviors drawn from Genter and
+Stone \cite{genter201612steplookahead,genter2016facegoalfacecurrent,
+genter2015placement}, one behavior adapted from Couzin et. al.
+\cite{couzin2005}, and one new \textit{multistep} behavior.
+
+In previous work, Genter and Stone have introduced baseline behaviors
+\textit{face} and \textit{offset momentum}, as well as more sophisticated
+behaviors \textit{one step lookahead} and \textit{coordinated}.
+Each of these behaviors aims to turn Reynolds-Vicsek agents to a pre-set goal
+angle $\theta^*$.
 In \textit{face}, influencing agents always face the angle $\theta^*$.
 In \textit{offset momentum}, influencing agents calculate the average velocity
 vector of the agents in their neighborhood, and take on a velocity vector that,
@@ -147,48 +158,10 @@ For a more detailed explanation of these behaviors, especially the
 \textit{coordinated} behavior, we direct the reader to Genter and Stone
 \cite{genter201612steplookahead}.
 
-\subsection{Global Behaviors}
-TODO: ADD COUZIN VERSION, ADD OTHER NET BEHAVIORS, ADD BEHAVIORS THAT DIDN'T
-MAKE IT?
+Couzin et. al. TALK ABOUT THE COUZIN BEHAVIOR HERE
 
-The global behaviors we investigate are listed in Table \ref{table:global}.
-Again, we use the same global behaviors for the \textit{large} and
-\textit{small} settings: \textit{direct}, \textit{random}, and
-\textit{multistep}.
-As its name suggests, the \textit{direct} global behavior has each influencing
-agent use a local behavior to directly influence its neighbors towards the
-goal angle $\theta^*$.
-When an influencing agent has no neighbors, it simply faces the goal direction.
-
-\begin{table}[]
-\footnotesize
-\centering
-\caption{Summary of global behaviors we investigate}
-\label{table:global}
-\begin{tabular}{|l|l|l|l|}
-\hline
-\textbf{Setting}       & \textbf{Type}               & \textbf{Name}        & \textbf{Description}                    \\ \hline
-\multirow{3}{*}{Large} & \multirow{3}{*}{\textbf{}}  & \textit{Direct}      & Influence neighbors or face goal        \\ \cline{3-4}
-                       &                             & \textit{Random}      & Influence neighbors or face random      \\ \cline{3-4}
-                       &                             & \textit{Multistep}   & \textit{\textbf{Follow-then-influence}} \\ \hline
-\multirow{4}{*}{Herd}  & Net                         & \textit{Direct}      & Influence neighbors or face goal        \\ \cline{2-4}
-                       & \multirow{3}{*}{Stationary} & \textit{Circle}      & Trace circle around agents              \\ \cline{3-4}
-                       &                             & \textit{Polygon}     & Trace polygon around agents             \\ \cline{3-4}
-                       &                             & \textit{Multicircle} & \textit{\textbf{Follow-then-influence}} \\ \hline
-\end{tabular}
-\end{table}
-
-The \textit{random} global behavior is very similar, but it directs influencing
-agents in a random direction when they have no Reynolds-Viscek neighbors.
-We introduced this behavior as a response to interactions where an influencing
-agent is almost successful in changing the direction of a group of Reynolds-Viscek
-agents, but gets separated before it is completely successful.
-In these cases, the Reynolds-Viscek agents are left on a trajectory that is almost
-parallel to the goal direction; as a result, further interactions with
-influencing agents are rare.
-
-The \textit{multistep} behavior is a novel contribution and adopts what we call
-a ``follow-then-influence" behavior.
+Finally, the \textit{multistep} behavior is a novel contribution and adopts
+what we call a ``follow-then-influence" behavior.
 In the initial stage, influencing agents simply behave like normal Reynolds-Viscek 
 agents; as a result, they easily join flocks and become distributed throughout
 the grid.
@@ -205,12 +178,21 @@ Given their local estimates, the influencing agents compute a global sum of all
 their estimates; once that sum passes over some threshold $T$, the influencing
 agents calculate the average angle $\overline{\theta}$ among all the agents that
 are locally connected to influencing agents, and from there adopt the
-\textit{direct} behavior with goal direction $\overline{\theta}$.
+\textit{face} behavior with goal direction $\overline{\theta}$.
 We choose $\overline{\theta}$ to minimize the amount that each influencing 
 agent needs to turn its flock on average.
 
-For the \textit{herd} setting, we divide our global behaviors into two
-categories: \textit{net} behaviors and \textit{stationary} behaviors.
+We also explore some variations on the \textit{multistep} behavior; notice that
+once the sum of connected agents passes the threshold $T$, any of the other
+behaviors studied can be used to turn the Reynolds-Vicsek agents towards the
+final goal direction $\overline{\theta}$.
+In other words, the \textit{multistep} behavior can be paired with any other
+behavior.
+We study these pairings to see how effective they are.
+
+\subsection{Herd Setting}
+For the \textit{herd} setting, we divide our behaviors into two categories:
+\textit{net} behaviors and \textit{stationary} behaviors.
 As a reminder, in the \textit{herd} setting, the simulation space is
 non-toroidal, and all the Reynolds-Viscek agents start in a circle in the
 center.
@@ -223,11 +205,11 @@ from their initial starting position (\textit{net} behaviors).
 Since all our agents have a constant speed, the former is much more difficult
 than the latter, so we must evaluate them separately.
 
-The \textit{net} behavior is equivalent to the \textit{direct} behavior; there
-is a single pre-determined goal direction, and the influencing agents try to
-direct the Reynolds-Viscek agents towards the goal direction.
-We call it a net behavior because it looks as if the influencing agents are
-``catching" the Reynolds-Viscek agents in a net.
+For our \textit{net} behaviors, we can use all the behaviors used in the
+\textit{large} setting, except for the \textit{multistep} behavior.
+Since the world is non-toroidal, it is not guaranteed that the number of
+connected agents will ever pass the threshold $T$; in this case, the
+influencing agents would simply wander forever.
 
 We study three \textit{stationary} behaviors: \textit{circle}, \textit{polygon},
 and \textit{multicircle}.
@@ -237,8 +219,8 @@ For placement strategies where influencing agents have different distances to
 the origin, the influencing agents simply trace circles and polygons of
 different radii.
 
-The \textit{multicircle} behavior is analogous to the \textit{multistep} behavior
-from \textit{large}.
+The \textit{multicircle} behavior is analogous to the \textit{multistep}
+behavior from \textit{large}.
 The influencing agents start out by circling around the origin and wait for
 Reynolds-Viscek agents to enter their neighborhood.
 Once they detect Reynolds-Viscek agents in their neighborhood, they adopt a
@@ -251,23 +233,175 @@ also makes maintaining influence easier; since the final radius is larger than
 the original radius, the final path turns less sharply than if the influencing
 agents had stayed at their original radius.
 To the best of our knowledge, this is the first presentation of such a
-multi-stage behavior to induce circling behavior under the Reynolds-Vicsek model in
-the literature.
+multi-stage behavior to induce circling behavior under the Reynolds-Vicsek
+model in the literature.
 
-Besides the above global behaviors, we also explored a few more variations on
-the \textit{net} behavior and the \textit{multicircle} behavior.
-One variation of the \textit{net} behavior was equivalent to the \textit{random}
-global behavior from the large setting.
-The other was similar to the stationary \textit{circle} behavior; influencing
-agents would trace a circle until encountering Reynolds-Viscek agents,
-whereupon they would influence the Reynolds-Viscek agents towards the goal
-direction.
-The variations on the \textit{multicircle} behavior included different final
-radii from those presented in $\S\ref{sec:evaluation}$, as well as a variation
-that introduced a transitional period between the initial following state and
-the final circling state.
-These additional variants added few qualitative insights, so we do not report
-them for simplicity of exposition.
+%To help organize our analysis, we split behaviors into local and global
+%components; each influencing agent behavior is composed of a local and global
+%component.
+%The local component takes a desired orientation as an argument and dictates
+%which direction an influencing agent will face to try to influence its neighbors
+%towards the goal orientation.
+%The global component, on the other hand, dictates the desired orientation to
+%feed to the local component and how the influencing agents might coordinate to
+%decide on a desired orientation.
+%For example, one behavior might be for the influencing agents to circle around
+%the center of a grid and get the Reynolds-Viscek agents to circle with them.
+%The global component would compute the desired orientation necessary at each
+%step to maintain the circling behavior, and the local component would compute
+%which exact direction to face to get the Reynolds-Viscek agents to face the
+%desired orientation at that step.
+%For grammatical sanity, we will refer to different candidates for local and
+%global components as ``local behaviors" and ``global behaviors" throughout the
+%rest of this paper; however, it is important to recognize that any actual
+%behavior must have a local and global component.
+%
+%\subsection{Local Behaviors}
+%Like our placement strategies, we draw on Genter and Stone for many of our
+%local behaviors \cite{genter201612steplookahead,genter2016facegoalfacecurrent,
+%genter2015placement}.
+%In previous work, they have introduced baseline behaviors \textit{face} and
+%\textit{offset momentum}, as well as more sophisticated behaviors \textit{one
+%step lookahead} and \textit{coordinated}.
+%Each of these behaviors requires a goal angle $\theta^*$.
+%In \textit{face}, influencing agents always face the angle $\theta^*$.
+%In \textit{offset momentum}, influencing agents calculate the average velocity
+%vector of the agents in their neighborhood, and take on a velocity vector that,
+%when added to the average velocity vector, sums to the vector pointing in
+%direction $\theta^*$.
+%In \textit{one step lookahead}, each influencing agent cycles through different
+%angles and simulates one step of each of its neighbors if it were to move in
+%that angle.
+%It adopts the angle that results in the smallest average difference in angle
+%from $\theta^*$ among all its neighbors.
+%Finally, in \textit{coordinated}, each agent pairs with another and runs a one
+%step lookahead to minimize the average difference in angle from $\theta^*$
+%among both their neighbors.
+%For a more detailed explanation of these behaviors, especially the
+%\textit{coordinated} behavior, we direct the reader to Genter and Stone
+%\cite{genter201612steplookahead}.
+%
+%\subsection{Global Behaviors}
+%TODO: ADD COUZIN VERSION, ADD OTHER NET BEHAVIORS, ADD BEHAVIORS THAT DIDN'T
+%MAKE IT?
+%
+%The global behaviors we investigate are listed in Table \ref{table:global}.
+%Again, we use the same global behaviors for the \textit{large} and
+%\textit{small} settings: \textit{direct}, \textit{random}, and
+%\textit{multistep}.
+%As its name suggests, the \textit{direct} global behavior has each influencing
+%agent use a local behavior to directly influence its neighbors towards the
+%goal angle $\theta^*$.
+%When an influencing agent has no neighbors, it simply faces the goal direction.
+%
+%\begin{table}[]
+%\footnotesize
+%\centering
+%\caption{Summary of global behaviors we investigate}
+%\label{table:global}
+%\begin{tabular}{|l|l|l|l|}
+%\hline
+%\textbf{Setting}       & \textbf{Type}               & \textbf{Name}        & \textbf{Description}                    \\ \hline
+%\multirow{3}{*}{Large} & \multirow{3}{*}{\textbf{}}  & \textit{Direct}      & Influence neighbors or face goal        \\ \cline{3-4}
+%                       &                             & \textit{Random}      & Influence neighbors or face random      \\ \cline{3-4}
+%                       &                             & \textit{Multistep}   & \textit{\textbf{Follow-then-influence}} \\ \hline
+%\multirow{4}{*}{Herd}  & Net                         & \textit{Direct}      & Influence neighbors or face goal        \\ \cline{2-4}
+%                       & \multirow{3}{*}{Stationary} & \textit{Circle}      & Trace circle around agents              \\ \cline{3-4}
+%                       &                             & \textit{Polygon}     & Trace polygon around agents             \\ \cline{3-4}
+%                       &                             & \textit{Multicircle} & \textit{\textbf{Follow-then-influence}} \\ \hline
+%\end{tabular}
+%\end{table}
+%
+%The \textit{random} global behavior is very similar, but it directs influencing
+%agents in a random direction when they have no Reynolds-Viscek neighbors.
+%We introduced this behavior as a response to interactions where an influencing
+%agent is almost successful in changing the direction of a group of Reynolds-Viscek
+%agents, but gets separated before it is completely successful.
+%In these cases, the Reynolds-Viscek agents are left on a trajectory that is almost
+%parallel to the goal direction; as a result, further interactions with
+%influencing agents are rare.
+%
+%The \textit{multistep} behavior is a novel contribution and adopts what we call
+%a ``follow-then-influence" behavior.
+%In the initial stage, influencing agents simply behave like normal Reynolds-Viscek 
+%agents; as a result, they easily join flocks and become distributed throughout
+%the grid.
+%At the same time, each influencing agent estimates how many Reynolds-Viscek agents
+%are path-connected to it; here, we define two agents as being path-connected if
+%there is a path between them, where edges are created by two agents being in
+%each other's neighborhood.
+%The astute reader will note that an accurate calculation requires a global view
+%from every influencing agent, since paths may extend arbitrarily far away from
+%the influencing agent.
+%In our algorithm, we only consider Reynolds-Viscek agents that are within the
+%sensing radius of the influencing agents.
+%Given their local estimates, the influencing agents compute a global sum of all
+%their estimates; once that sum passes over some threshold $T$, the influencing
+%agents calculate the average angle $\overline{\theta}$ among all the agents that
+%are locally connected to influencing agents, and from there adopt the
+%\textit{direct} behavior with goal direction $\overline{\theta}$.
+%We choose $\overline{\theta}$ to minimize the amount that each influencing 
+%agent needs to turn its flock on average.
+%
+%For the \textit{herd} setting, we divide our global behaviors into two
+%categories: \textit{net} behaviors and \textit{stationary} behaviors.
+%As a reminder, in the \textit{herd} setting, the simulation space is
+%non-toroidal, and all the Reynolds-Viscek agents start in a circle in the
+%center.
+%In this setting, flock formation is not guaranteed, so we are interested in
+%using influencing agents to instigate flocking behavior.
+%There are two different choices we can make; we can either try to force the
+%Reynolds-Viscek agents to stay in the center (\textit{stationary} behaviors),
+%or we can let the influencing agents direct the Reynolds-Viscek agents away
+%from their initial starting position (\textit{net} behaviors).
+%Since all our agents have a constant speed, the former is much more difficult
+%than the latter, so we must evaluate them separately.
+%
+%The \textit{net} behavior is equivalent to the \textit{direct} behavior; there
+%is a single pre-determined goal direction, and the influencing agents try to
+%direct the Reynolds-Viscek agents towards the goal direction.
+%We call it a net behavior because it looks as if the influencing agents are
+%``catching" the Reynolds-Viscek agents in a net.
+%
+%We study three \textit{stationary} behaviors: \textit{circle}, \textit{polygon},
+%and \textit{multicircle}.
+%The \textit{circle} and \textit{polygon} behaviors have each influencing agent
+%trace a circle or polygon around the origin.
+%For placement strategies where influencing agents have different distances to
+%the origin, the influencing agents simply trace circles and polygons of
+%different radii.
+%
+%The \textit{multicircle} behavior is analogous to the \textit{multistep} behavior
+%from \textit{large}.
+%The influencing agents start out by circling around the origin and wait for
+%Reynolds-Viscek agents to enter their neighborhood.
+%Once they detect Reynolds-Viscek agents in their neighborhood, they adopt a
+%``following" behavior where they act like Reynolds-Viscek agents to integrate
+%into a small flock.
+%They continue this following stage until reaching a final radius $r_F$, at which
+%point they again adopt a circling behavior.
+%In addition to building influence by following before influencing, this behavior
+%also makes maintaining influence easier; since the final radius is larger than
+%the original radius, the final path turns less sharply than if the influencing
+%agents had stayed at their original radius.
+%To the best of our knowledge, this is the first presentation of such a
+%multi-stage behavior to induce circling behavior under the Reynolds-Vicsek model in
+%the literature.
+%
+%Besides the above global behaviors, we also explored a few more variations on
+%the \textit{net} behavior and the \textit{multicircle} behavior.
+%One variation of the \textit{net} behavior was equivalent to the \textit{random}
+%global behavior from the large setting.
+%The other was similar to the stationary \textit{circle} behavior; influencing
+%agents would trace a circle until encountering Reynolds-Viscek agents,
+%whereupon they would influence the Reynolds-Viscek agents towards the goal
+%direction.
+%The variations on the \textit{multicircle} behavior included different final
+%radii from those presented in $\S\ref{sec:evaluation}$, as well as a variation
+%that introduced a transitional period between the initial following state and
+%the final circling state.
+%These additional variants added few qualitative insights, so we do not report
+%them for simplicity of exposition.
 
 % This behavior is parameterized by three variables, a placement radius $r_P$, a
 % threshold radius $r_T$ and a final radius $r_F$.
@@ -316,18 +450,13 @@ them for simplicity of exposition.
 % During the actual simulations, we calculate this point numerically, walking
 % along both sides of the orthogonal line until finding the right candidate.
 
-\section{Evolving Local Behaviors}
-Local behaviors are relatively simple, since they have a single goal vector
-and have a limited amount of input (simply a list of Reynolds-Vicsek agents in
-the influencing agent's sensing radius).
-As a result, they are a natural candidate for a first pass at evolving
-components of influencing agent design.
-To evolve local behaviors, we run genetic algorithms over genomes containing
+\section{Evolving Behaviors}
+To evolve behaviors, we run genetic algorithms over genomes containing
 abstract syntax trees for a simple domain specific language we designed
 specifically for computing a new heading from a list of neighboring agents.
 
 \subsection{Domain Specific Language}
-All evolved local behaviors need to be well-defined for any number of
+All evolved behaviors need to be well-defined for any number of
 neighboring agents, so we choose an execution model that generalizes over the
 number of neighbors a influencing agent has.
 Every expression in our domain specific language defines a function from an
@@ -486,8 +615,8 @@ old population, we repeat the following:
     randomly select one to add.
 \end{enumerate}
 
-We experimented with a few variations on this algorithm over the course of the
-project.
+We experimented with a few variations on this algorithm over the course of this
+work.
 We started by choosing one individual in each generation to mutate, and randomly
 replaced one individual, chosen proportionally to fitness (keeping in mind that
 closer to $0$ is better).
@@ -499,4 +628,4 @@ with very similar fitness.
 We ultimately settled on our seed population approach as a compromise between
 these two forces.
 We also initially evolved genomes without the bias towards shorter genomes,
-but we found that this let to blow-out as soon as we added crossover.
+but we found that this led to blow-out as soon as we added crossover.

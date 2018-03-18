@@ -1,12 +1,11 @@
-Run all the small simulations, with momentum = 0
+Get rid of all references to global and local behaviors
 
-Run large and herd again, with momentum = 0 just to verify that that isn't the
-root cause of this (maybe put the results in the appendix?) - DONE
-Large is basically the same, but herd is all messed up because of momentum = 0
-bug
+Two graphs for large setting: one with face, offset momentum,
+one step lookahead, coordinated, couzin, and multistep + face;
+one comparing multistep + face to multistep + others
 
-In thesis: present momentum = 0 for large and small, but momentum = 1 for herd
-Mention the bug in the MASON simulator that prevents accurate simulation of
-non-toroidal worlds, so that's why we set momentum = 1 for herd
+Then have one graph comparing genetic algorithms to best hand-designed
+algorithms (probably multistep + face)
 
-Run genetic algorithms again for momentum = 0
+Herd setting stays mostly the same, but need to change some words in the
+figures

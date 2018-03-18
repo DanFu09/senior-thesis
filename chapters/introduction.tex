@@ -83,19 +83,19 @@ Since this space is non-toroidal, flock formation is not guaranteed, so we
 study whether influencing agents can instigate flocking behavior by keeping the
 flocking agents in a pre-defined area, or move them all in a certain direction.
 
-To help organize our analysis, we consider three different aspects of
-influencing agent design: placement strategy, local behaviors, and global
-behaviors.
-Placement strategies refer to the initial placement of influencing agents in the
-simulation space and their placement relative to flocking agents.
-Local behaviors dictate how an influencing agent attempts to influence local
-neighbors to face a given goal direction.
-Global behaviors, on the other hand, dictate how influencing agents determine
-their goal direction.
-For example, we might program all the influencing agents to have a
-pre-determined goal direction such as East or South, or we might program a
-global behavior that picks a goal direction after some time based on the
-initial dynamics of the simulation.
+%To help organize our analysis, we consider three different aspects of
+%influencing agent design: placement strategy, local behaviors, and global
+%behaviors.
+%Placement strategies refer to the initial placement of influencing agents in the
+%simulation space and their placement relative to flocking agents.
+%Local behaviors dictate how an influencing agent attempts to influence local
+%neighbors to face a given goal direction.
+%Global behaviors, on the other hand, dictate how influencing agents determine
+%their goal direction.
+%For example, we might program all the influencing agents to have a
+%pre-determined goal direction such as East or South, or we might program a
+%global behavior that picks a goal direction after some time based on the
+%initial dynamics of the simulation.
 
 We find that in environments with low agent density, agent interactions are rare,
 so results from experiments in smaller settings do not translate well to larger
@@ -104,7 +104,7 @@ In particular, when agent interactions are rare, maintaining a connection to
 the flock becomes a key factor in the efficacy of influencing agent behaviors.
 As a result, simple local behaviors such as ``face the goal direction" are
 often superior to more complex local behaviors that try to optimize for speed.
-We also experiment with a number of new strategies and find that a multi-stage 
+We also experiment with a number of new behaviors and find that a multi-stage 
 approach of ``follow-then-influence" can be effective in certain 
 situations.
 In this approach, influencing agents start out by obeying the flocking rules,
@@ -115,7 +115,7 @@ Finally, we find that reasonable placement strategies are often
 interchangeable, and that more complex strategies often perform similarly to 
 random strategies.
 
-Next, we use genetic programming to generate different local behaviors.
+Next, we use genetic programming to generate different new behaviors.
 In order to build behaviors that work with variable numbers of neighbors, we
 evolve programs that are applied iteratively to each neighbor using
 a functional programming construct called a fold.
@@ -137,18 +137,14 @@ fitness value for the proposed program.
 We then run the evolutionary algorithm on this fitness value and mutate the
 best candidates each generation.
 
-To evaluate the evolved local behaviors in a wider context, we pair the local
-behaviors with global behaviors and evaluate them in both high-density and
-low-density settings.
+To evaluate these behaviors in a wider context, we then test them in our two
+new settings as well.
 We find that the genetic behaviors can both encourage faster convergence in the
 short term while still maintaining influence over the long-term.
-As a result, they can outperform the best hand-constructed algorithms in small
-simulation spaces while not falling to the common pitfalls of the larger
-simulation spaces.
+As a result, they can perform as well as the best hand-constructed algorithms.
 However, they can also be difficult to understand and reason about.
 In particular, some genetic behaviors work very well when paired with certain
-global behaviors, but experience catastrophic failures when paired with other
-global behaviors.
+global behaviors, but experience catastrophic failures when paired with others.
 
 The main contributions of this work are:
 \begin{itemize}
