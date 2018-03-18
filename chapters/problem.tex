@@ -26,9 +26,7 @@ neighborhood radius $r$ of $a_i$, not including $a_i$ itself.
 At timestep $t$, each agent updates its orientation to turn towards the average
 of its neighbors' orientations:
 \[\theta_i(t+1)=\theta_i(t)+\frac{1}{2}\frac{1}{|N_i(t)|} \Sigma_{a_j \in
-N_i(t)} \text{calcDiff}(\theta_j(t),\theta_i(t)),\]
-where $\text{calcDiff}$ computes the difference between two angles, always
-returning an angle between $0$ and $\pi$.
+N_i(t)} \theta_j(t) - \theta_i(t),\]
 The $\frac{1}{2}$ term denotes a ``momentum" factor, wherein agents have
 a tendency to keep their current orientation.
 

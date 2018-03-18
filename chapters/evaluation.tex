@@ -123,9 +123,9 @@ and to allow for memoization to make our algorithm run faster.
 
 Finally, we add a small penalty for the number of nodes in the genome.
 This gives the following cost function:
-\[ \sum_{i=1}^6 \text{calcDiff}(\theta_i, \theta_{east}) + \alpha N_{nodes}, \]
-where $N_{nodes}$ is the number of nodes in the genome, and $\alpha$ is a
-regularization factor.
+\[ \sum_{i\in A} |\theta_i - \theta_{east}| + \alpha N_{nodes}, \]
+where $A$ is the set of $6$ Reynolds-Vicsek agents, $N_{nodes}$ is the number
+of nodes in the genome, and $\alpha$ is a regularization factor.
 In our experiments, we set $\alpha=0.1$ to allow development of complexity but
 to prevent blow-out.
 

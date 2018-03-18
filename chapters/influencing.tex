@@ -158,7 +158,28 @@ For a more detailed explanation of these behaviors, especially the
 \textit{coordinated} behavior, we direct the reader to Genter and Stone
 \cite{genter201612steplookahead}.
 
-Couzin et. al. TALK ABOUT THE COUZIN BEHAVIOR HERE
+Couzin et. al. explored algorithms that would allow ``informed agents" to steer
+an animal group \cite{couzin2005}, albeit with a different flocking model.
+These informed agents are analogous to our influencing agents.
+They proposed an algorithm where influencing agents chose an orientation in
+between the goal direction and the direction they would travel if they were
+regular flocking agents.
+This algorithm is parameterized by a value $\omega$ and works as follows.
+Consider an influencing agent with goal orientation $\theta^*$; let this be
+represented by a unit vector $\vec{v}^*$.
+Suppose the influencing agent's orientation at time $t$ is given by
+$\theta(t)$; let this be represented by a unit vector $\vec{d}(t)$.
+Let $\hat{\theta}(t+1)$ be the direction that the influencing agent would face
+if it were a normal flocking agent; again, let this by represented by a unit
+vector $\hat{\vec{d}}(t+1)$.
+Then influencing agent would have direction
+$$\vec{d}(t+1) = \frac{\hat{\vec{d}}(t+1) + \omega\vec{v}^*}
+{|\hat{\vec{d}}(t+1) + \omega\vec{v}^*|}$$
+at time $t+1$.
+$\omega=0$ corresponds to a regular flocking agent, while very high
+values of $\omega$ grow closer to the \textit{face} behavior.
+Couzin et. al. found that increasing $\omega$ can lead to more accurate
+convergence, but at the cost of potentially breaking up the flock.
 
 Finally, the \textit{multistep} behavior is a novel contribution and adopts
 what we call a ``follow-then-influence" behavior.
