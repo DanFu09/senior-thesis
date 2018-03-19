@@ -50,7 +50,7 @@ direction, since full convergence takes much longer.
 
 We test the \textit{random}, \textit{grid}, and \textit{k-means} placement
 strategies, along with our full suite of behaviors in the \textit{large}
-setting, including the genetically-evolved behaviors.
+setting.
 We place $300$ Reynolds-Vicsek agents on the grid and vary
 the number of influencing agents from $10$ to $100$ in intervals of $10$.
 
@@ -201,37 +201,36 @@ the average number of lone agents to be less than the total number of agents.
 
 \subsection{Influencing Agents in the Large Setting}
 
-TODO: ONE GRAPH FOR THE MAIN VARIATION ON ALL OUR BEHAVIORS, THEN ONE GRAPH
-SHOWING VARIATIONS ON THE MULTISTEP BEHAVIOR
-
-MOST OF THE TEXT WILL PROBABLY BE THE SAME
-
 Next, we report on the efficacy of the hand-designed behaviors in the
 \textit{large} setting.
-The average times for $50\%$ convergence under different combinations of placement
-strategies with global and local behaviors are shown in Figure $\ref{fig:large}$.
+The average times for $50\%$ convergence with different placement strategies
+and our primary six behaviors are shown in Figure $\ref{fig:large}$.
 We show graphs for $50$ influencing agents only, since the trends for the other
 numbers of influencing agents were similar (the major difference being that
 when there are more influencing agents, convergence happens faster).
+The results for the \textit{Couzin} behavior are shown at $\omega = 0.5$; this
+value was experimentally shown by Couzin et. al. to be the highest value at
+this proportion of influencing agent that would not consistently break up the
+flock.
 Note that smaller is better in these graphs.
 \begin{figure}
     \includegraphics[width=\textwidth]{largesinglerow}
     \caption{Average times to 50\% convergence for $300$ Reynolds-Vicsek agents
     with $50$ influencing agents in the \textit{large} setting under different
-    placement strategies, paired with various global and local behaviors.
-    Smaller is better.}
+    placement strategies and behaviors.
+    Smaller is better.
+    Error bars show standard error of the mean.}
     \label{fig:large}
 \end{figure}
+
 The most immediately striking finding is that, in our more adverse setting,
-the \textit{one step lookahead} and \textit{coordinated} local behaviors
-significantly underperform the \textit{face} behavior irrespective of global
-behavior and also underperform \textit{offset momentum} for the \textit{face}
-and \textit{random} global behaviors.
+the \textit{one step lookahead} and \textit{coordinated} behaviors
+significantly underperform the ``baseline" \textit{face} and
+\textit{offset momentum} behaviors, irrespective of placement strategy.
 This is an opposite result from Genter and Stone's findings on smaller simulation
 spaces \cite{genter201612steplookahead, genterthesis}, which found that
 \textit{one step lookahead} and \textit{coordinated} outperform \textit{face}
-and \textit{offset momentum} (the latter of which are in fact presented as
-``baseline" behaviors).
+and \textit{offset momentum}.
 This finding is also rather counterintuitive; why should the ``smarter" behaviors
 underperform the simpler behaviors?
 
@@ -258,14 +257,14 @@ here because they tend to send influencing agents away from neighboring agents.
 An example of this phenomenon is shown in Figure $\ref{fig:losing_influence}$.
 The influencing agent, shown in black, adopts an orientation that turns
 neighboring Reynolds-Vicsek agents towards the goal direction.
-Even though this does turn Reynolds-Vicsek agents towards the goal direction, it cannot
-successfully turn all the agents in a single step; as a result, it must maintain
-that orientation for future steps.
+Even though this does turn Reynolds-Vicsek agents towards the goal direction,
+it cannot successfully turn all the agents in a single step; as a result, it
+must maintain that orientation for future steps.
 However, as long as the neighboring agents are not facing the goal direction,
 the influencing agent's chosen orientation takes it away from the center of the
 flock of Reynolds-Vicsek agents, causing it to lose influence.
-Once the influencing agent has lost influence, it is difficult to catch up to the
-same flock, since influencing agents travel at the same speed\footnote{
+Once the influencing agent has lost influence, it is difficult to catch up to
+the same flock, since influencing agents travel at the same speed\footnote{
 There are some approaches which remove this speed constraint from
 influencing agents \cite{han2010teleporting}.
 However, this allows for unrealistic behaviors wherein influencing agents travel
@@ -285,43 +284,57 @@ agents very quickly.
 As a result, the gains from the smarter local algorithm still outweigh the
 negative effects from losing influence.
 
+However, it is important to strike a balance between not losing influence and
+turning Reynolds-Vicsek agents too slowly.
+The \textit{Couzin} algorithm is adept at maintaining influence, but slightly
+underperforms the \textit{face} and \textit{offset momentum} behaviors in
+measuring time to convergence, because it simply takes longer for influencing
+agents to turn the Reynolds-Vicsek agents.
+
+The \textit{multistep} behavior does not suffer from the same problem; it
+can both maintain influence and influence Reynolds-Vicsek agents and so
+outperforms all the other behaviors by a couple hundred steps (less so under
+the \textit{grid} placement strategy).
+
+When the \textit{multistep} behavior is paired with the other behaviors,
+however, the effects of losing influence are magnified.
 \begin{figure}
     \includegraphics[width=\textwidth]{largesinglerowmultisteplog}
     \caption{Average times to 50\% convergence for $300$ Reynolds-Vicsek agents
     with $50$ influencing agents in the \textit{large} setting under variations
     of the multistep behavior.
-    Smaller is better.}
+    Smaller is better.
+    Error bars show standard error of the mean.}
     \label{fig:largemultistep}
 \end{figure}
-This effect is more pronounced when those behaviors are paired with the
-\textit{multistep} behavior.
 Figure \ref{fig:largemultistep} shows variations on the \textit{multistep}
 behavior, wherein influencing agents adopt different behaviors after the number
 of Reynolds-Vicsek agents under control passes $T$.
-First, we note that the \textit{multistep} global behavior paired with the
-\textit{face} local behavior seems to slightly outperform the \textit{direct}
-and \textit{random} global behaviors, but the \textit{multistep} global behavior
-paired with the other local behaviors drastically underperform anything else.
+Note that the variations that pair the \textit{multistep} behavior with the
+\textit{offset momentum}, \textit{one step lookahead}, and \textit{coordinated}
+behaviors perform almost an order of magnitude worse than the vanilla
+\textit{multistep} behavior.
 What is the root cause of this difference?
-The \textit{multistep} global behavior starts out by creating many local flocks,
-some of which have influencing agents in them.
+The \textit{multistep} behavior starts out by creating many local flocks, some
+of which have influencing agents in them.
 When interactions are rare, the \textit{offset momentum}, \textit{one step
 lookahead}, and \textit{coordinated} behaviors have difficulties changing the
 orientation of existing flocks quickly before losing influence.
 As a result, the \textit{multistep} behavior takes an order of magnitude longer
 to reach convergence when paired with the other local behaviors.
+This does not happen with the \textit{Couzin} variation of the
+\textit{multistep} behavior, since the \textit{Couzin} variation can maintain
+influence (note that convergence still takes slightly longer, however).
 
 Finally, we note that the effect of placement behaviors on convergence time
 are almost non-existent.
 When the density is lower, there is a much smaller chance that any influencing
-agent will start out with more than one Reynolds-Vicsek agent in its neighborhood,
-even with the \textit{k-means} placement behavior.
+agent will start out with more than one Reynolds-Vicsek agent in its
+neighborhood, even with the \textit{k-means} placement behavior.
 As a result, even the best clustering approach is almost the same as starting
 out randomly or in a grid.
 
 \subsection{Influencing Agents in the Herd Setting}
-
-TODO: GET RID OF REFERENCES TO LOCAL AND GLOBAL BEHAVIORS
 
 Next, we evaluate results for our experiments in the \textit{herd} setting.
 In many cases, measuring the number of agents facing the same direction is not
@@ -348,9 +361,8 @@ in Figure $\ref{fig:herd}$ for both the net and stationary behaviors.
     The net behavior moves the influencing agents and their Reynolds-Vicsek agents
     off-screen, while the stationary behaviors keep the influencing agents near
     the goal area using some sort of circling technique.
-    For the stationary behaviors, we found the only effective local behavior
-    was \textit{face}, so it is the only local behavior displayed.
-    Larger is better.}
+    Larger is better.
+    Error bars represent standard error of the mean.}
     \label{fig:herd}
 \end{figure}
 % \begin{figure}
@@ -375,14 +387,19 @@ instance).
 Thus, we analyze the net behaviors separately from the stationary behaviors.
 
 \subsubsection{Net}
-Again, we find that the \textit{face} local behavior tends to outperform the
+Again, we find that the \textit{face} behavior tends to outperform the
 \textit{offset momentum}, \textit{one step lookahead}, and \textit{coordinated}
-local behaviors.
+behaviors.
 Again, we attribute this to the tendency of the \textit{offset momentum},
 \textit{one step lookahead}, and \textit{coordinated} behaviors to lose
 influence over time.
 We note that the effect is not as pronounced here as in our \textit{large}
 experiments, since each influencing agent has to control fewer agents.
+Note that the \textit{face} behavior no longer outperforms the \textit{Couzin}
+behavior, except with one placement strategy.
+Because the metric has changed to sustained influence over time, it no longer
+matters that the \textit{Couzin} behavior turns the Reynolds-Vicsek agents
+slower.
 
 In contrast to the \textit{large} experiments, we do find that the placement
 strategy has a major effect on the efficacy of the net behavior.
@@ -392,14 +409,14 @@ circle about the origin with radius $750$) vastly underperforms the other
 placement strategies.
 The larger radius results in a lower density of influencing agents, so a greater
 number of Reynolds-Vicsek agents slip through the ``holes" in the net.
-Furthermore, by the time the Reynolds-Vicsek agents reach the border, they have already
-formed local flocks, and it is more difficult for the influencing agents to
+Furthermore, by the time the Reynolds-Vicsek agents reach the border, they have
+already formed flocks, and it is more difficult for the influencing agents to
 point them in the right direction.
-This effect is less pronounced for \textit{Random 750} and \textit{Grid 750},
-since these strategies place influencing agents within the circle, and not simply
-along its circumference.
-As a result, the Reynolds-Vicsek agents still encounter influencing agents before
-reaching the circumference of the circle.
+This effect is less pronounced for \textit{Grid 750} and almost non-existant
+for \textit{Random 750}, since these strategies place influencing agents within
+the circle, and not simply along its circumference.
+As a result, the Reynolds-Vicsek agents still encounter influencing agents
+before reaching the circumference of the circle.
 
 Finally, we note that \textit{k-means} outperforms all other placement strategies
 by a few agents.
@@ -411,32 +428,21 @@ other placement strategies.
 This helps it pick up more Reynolds-Vicsek agents in the net.
 
 \subsubsection{Stationary}
-For the stationary behaviors, we found that any local behavior except for
-\textit{face} was almost completely ineffective; the average number of agents
-under influencing agent control after $15000$ steps across $100$ trials was
-almost $0$.
-Again, this is a result of the inability of the \textit{offset momentum},
-\textit{one step lookahead}, and \textit{coordinated} local behaviors to
-maintain influence over time.
-Each of the stationary behaviors requires the influencing agents to keep the
-Reynolds-Vicsek agents rotating about the origin in some way.
-Without consistent influence, this is impossible.
-
-Beyond that, we find that the \textit{multicircle} behavior slightly
-underperforms the \textit{circle} behavior when paired with the
-\textit{Border} placement strategies, but slightly overperforms when paired
-with the  \textit{k-means}, \textit{Random}, \textit{Circle}, and
-\textit{Grid} placement strategies, and performs the same as \textit{circle}
-n the \textit{Grid} strategies.
+For the stationary behaviors, we find that the \textit{multicircle} behavior
+slightly underperforms the \textit{circle} behavior when paired with the
+\textit{Border} placement strategies; slightly overperforms when paired
+with the  \textit{k-means}, \textit{Random}, and \textit{Grid 500} placement
+strategies; and performs the same as \textit{circle} in the \textit{Grid 750}
+strategy.
 What drives these trends?
 Once \textit{multicircle} reaches the final stage, it is tracing a larger
 circle than the \textit{circle} behavior traces on its own.
-As a result, it is easier to maintain influence and turn the Reynolds-Vicsek agents
-over time in the final stage.
+As a result, it is easier to maintain influence and turn the Reynolds-Vicsek
+agents over time in the final stage.
 Before that, however, the influencing agents are in a following stage.
 When the influencing agents start out inside the circle, they have more time to
-infiltrate small flocks of Reynolds-Vicsek agents and induce a circling behavior in
-the final stage.
+infiltrate small flocks of Reynolds-Vicsek agents and induce a circling
+behavior in the final stage.
 
 Finally, we note that \textit{Border 750} is the worst placement strategy,
 for reasons similar to the reasons for the net behaviors, and \textit{polygon}
@@ -455,8 +461,12 @@ For the last run, we selected the top $20$ genomes.
 As an optimization, we memoized genomes from generation to generation and re-used
 results where possible.
 We allowed for duplicate members in the population.
-The average angle difference across the population and the angle difference of the
-best genome in each generation are shown in Figure $\ref{fig:genetic_runs}$.
+The average angle difference across the population and the angle difference of
+the best genome in each generation are shown in Figure $\ref{fig:genetic_runs}$.
+We also show performances of \textit{face}, \textit{offset momentum},
+\textit{one step lookahead}, and \textit{Couzin} for comparison.
+We do now show \textit{coordinated}, since \textit{coordinated} is equivalent
+to \textit{one step lookahead} when there is only a single influencing agent.
 \begin{figure}
     \centering
     \includegraphics[width=0.45\textwidth]{run07}
@@ -468,8 +478,8 @@ best genome in each generation are shown in Figure $\ref{fig:genetic_runs}$.
     population over generations for a five different runs of the genetic algorithm.
     The first four runs had population size $25$ and ran for $50$ generations,
     while the last run has population size $100$ and ran for $300$ generations.
-    Fitnesses of \textit{face}, \textit{offset momentum}, and \textit{one step
-    lookahead} provided for comparison.}
+    Fitnesses of \textit{face}, \textit{offset momentum}, \textit{one step
+    lookahead}, and \textit{Couzin} provided for comparison.}
     \label{fig:genetic_runs}
 \end{figure}
 
@@ -498,13 +508,16 @@ These are shown in Table $\ref{table:genomes}$
     \hline
     \textbf{Name} & \textbf{Genome} \\
     \hline
-    G1 & acc=goal; (mul acc (gez (cos heading) (exp (sin heading) distance) (sin goal))) \\ \hline
+    \multirow{2}{*}{G1} & acc=goal; (mul acc (gez (cos heading) \\
+        & (exp (sin heading) distance) (sin goal))) \\ \hline
     G2 & acc=goal; (mul influence (mul influence goal)) \\ \hline
     G3 & acc=goal; (sub acc (mul -0.2678771899171444 goal)) \\ \hline
     G4 & acc=goal; (mul (mul acc (cos heading)) distance) \\ \hline
-    \multirow{2}{*}{G5} & acc=goal; (mul distance (mul (sub (sub goal 0.2801770623593902) heading) \\
+    \multirow{3}{*}{G5} & acc=goal; (mul distance \\
+    &(mul (sub (sub goal 0.2801770623593902) heading) \\
     & (mul (sub acc heading) goal))) \\ \hline
-    \multirow{2}{*}{G6} & acc=goal; (mul distance (mul (sin influence) (mul (sub (sub goal 0.2801770623593902) heading) \\
+    \multirow{3}{*}{G6} & acc=goal; (mul distance (mul (sin influence) \\
+    & (mul (sub (sub goal 0.2801770623593902) heading) \\
     & (mul (sub (sub goal 0.2801770623593902) heading) goal)))) \\ \hline
     G7 & acc=goal; (mul goal (gez (cos acc) 0.19745673470999736 goal)) \\ \hline
 \end{tabular}
@@ -571,23 +584,12 @@ behind.
 Thus, the Reynolds-Vicsek agents in front are somewhat of a lost cause, and it
 is beneficial to ignore them.
 
-\subsection{Influencing Agents in the Large Setting}
+\subsection{Influencing Agents in the Large and Herd Settings}
 Next, we verify that the genetic algorithms are still effective when used in
-larger settings and in conjunction with global behaviors and placement
-strategies.
+our larger settings.
 For example, \textit{one step lookahead} outperforms \textit{face} in the
 small-scale evaluations we use during evolution, but underperforms \textit{face}
 in simulations in the \textit{large} setting.
-To remind the reader, the \textit{large} setting places Reynolds-Vicsek agents
-randomly on a toroidal $1000x1000$ grid with random initial orientations.
-We evaluate our genetic behaviors paired with three placement strategies
-(\textit{random}, \textit{grid}, and \textit{k-means}), and three global
-behaviors (\textit{direct}, \textit{random}, and \textit{multistep}).
-We place $300$ Reynolds-Vicsek agents on the simulation space and use $50$
-influencing agents.
-We measure the number of steps necessary to reach $50\%$ convergence ($150$
-Reynolds-Vicsek agents all facing the same direction), measuring metrics every
-$100$ time steps and averaging over $100$ trials.
 The results are shown in Figure $\ref{fig:largegenetic}$.
 
 \begin{figure}
@@ -595,88 +597,67 @@ The results are shown in Figure $\ref{fig:largegenetic}$.
     \includegraphics[width=\textwidth]{largegeneticsinglerow}
     \caption{Average times to 50\% convergence for $300$ Reynolds-Vicsek agents
     with $50$ influencing agents in the \textit{large} setting under different
-    placement strategies, paired with various global and local behaviors.
-    The \textit{Random} global behavior paired with the \textit{G5} local behavior
-    performs very poorly; average convergence times are upwards of $30000$.
-    Smaller is better.}
+    placement strategies, paired with our hand-designed behaviors and the
+    selected genetic behaviors.
+    Smaller is better.
+    Error bars show standard error of the mean.}
     \label{fig:largegenetic}
 \end{figure}
-We find that the efficacy of the genetic behaviors varies depending
-on the global behavior.
-In particular, the genetic behaviors all perform on par with, or slightly
-better than, the \textit{face} local behavior when paired with the \textit{direct}
-global behavior.
-They all strongly outperform the \textit{one step lookahead} local behavior and
-slightly outperform the \textit{offset momentum} local behavior.
+We find that these genetic behaviors all perform on par with, or slightly
+better than, the \textit{face} behavior.
+They all strongly outperform the \textit{one step lookahead} and
+\textit{coordinated} behaviors, and slightly outperform the
+\textit{offset momentum} behavior.
+None perform as well as the \textit{multistep} behavior, then $\textit{G1}$
+comes close.
 
-When paired with the \textit{random} global behavior, however, the story changes
-drastically.
-Genetic behaviors G1, G4, and G7 still perform on par with the \textit{face} local
-behavior, but G2, G3, and G6 start performing as poorly as \textit{one step
-lookahead}.
-G5 takes a major hit; instead of converging within $4000$ timesteps, it takes up to
-$30000$ timesteps to converge.
-From watching the simulations, a very peculiar behavior emerges: when the
-influencing agent is moving in a random direction and meets a flock moving in a
-similar direction, the agent continues moving in the direction of the flock
-instead of turning the flock towards the goal direction.
-It is not clear to us why this behavior emerges, especially since G5's genome
-is one of the harder genomes to parse.
+%When paired with the \textit{random} global behavior, however, the story changes
+%drastically.
+%Genetic behaviors G1, G4, and G7 still perform on par with the \textit{face} local
+%behavior, but G2, G3, and G6 start performing as poorly as \textit{one step
+%lookahead}.
+%G5 takes a major hit; instead of converging within $4000$ timesteps, it takes up to
+%$30000$ timesteps to converge.
+%From watching the simulations, a very peculiar behavior emerges: when the
+%influencing agent is moving in a random direction and meets a flock moving in a
+%similar direction, the agent continues moving in the direction of the flock
+%instead of turning the flock towards the goal direction.
+%It is not clear to us why this behavior emerges, especially since G5's genome
+%is one of the harder genomes to parse.
+%
+%When paired with the \textit{multistep} global behavior, G1-3 once again
+%perform on par with the \textit{face} local behavior.
+%The G5 behavior again performs much worse, and the G6 behavior performs slightly
+%worse than the \textit{face} local behavior.
+%G4 and G7 perform slightly better than G1-3, and slightly outperform \textit{face}
+%(though not by a significant amount).
+%Notably, none of the genetic behaviors, not even G5, perform as badly as \textit{
+%offset momentum} and \textit{one step lookahead} do when paired with the
+%\textit{multistep} global behavior.
+%This is promising; it suggests that there are behaviors that can be more effective
+%than \textit{face} on a small scale but that can remain effective even when moving
+%to low-density settings.
 
-When paired with the \textit{multistep} global behavior, G1-3 once again
-perform on par with the \textit{face} local behavior.
-The G5 behavior again performs much worse, and the G6 behavior performs slightly
-worse than the \textit{face} local behavior.
-G4 and G7 perform slightly better than G1-3, and slightly outperform \textit{face}
-(though not by a significant amount).
-Notably, none of the genetic behaviors, not even G5, perform as badly as \textit{
-offset momentum} and \textit{one step lookahead} do when paired with the
-\textit{multistep} global behavior.
-This is promising; it suggests that there are behaviors that can be more effective
-than \textit{face} on a small scale but that can remain effective even when moving
-to low-density settings.
+%\subsection{Influencing Agents in the Herd Setting}
 
-\subsection{Influencing Agents in the Herd Setting}
-BRIEFLY EXPLAIN THE HERD SETTING AND THE DIFFERENT COMBINATIONS AGAIN, THEN SHOW THE BIG GRAPH
-
+Figure \ref{fig:herdnetgenetic} shows the performance of the genetic algorithms
+when used in the \textit{net} case of the \textit{herd} setting.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{herd_net_genetic}
     \caption{Average number of agents under influencing agent control after $15000$
     steps with $300$ Reynolds-Vicsek agents and $50$ influencing agents in the
-    \textit{herd} setting under for various placement strategies
-    and local influencing agent behaviors, all paired with various global
-    \textit{net} behaviors.
-    Larger is better.}
-    \label{fig:herd_net}
+    \textit{herd} setting under for various placement strategies and behaviors,
+    including the genetic algorithms.
+    Larger is better.
+    Error bars show standard error of hte mean.}
+    \label{fig:herdnetgenetic}
 \end{figure}
-
-To evaluate the contributions of influencing agents in the \textit{herd} setting
-we measure a slightly different metric.
-Since we have two qualitatively different categories of global behaviors (net
-behaviors vs. stationary behaviors), the number of agents facing the same
-direction is irrelevant, since the stationary behaviors rotate the agents around
-the origin (in fact, if the Reynolds-Vicsek agents are all facing the same
-goal direction, the stationary behavior has failed).
-Instead, we measure the number of Reynolds-Vicsek agents that are connected to
-influencing agents at $15000$ time steps; this is a measure of sustained
-influence over the Reynolds-Vicsek agents over time.
-
-We examine three circular placement strategies, \textit{border}, \textit{random},
-and \textit{grid}, with two placement radii, \textit{500} and \textit{750}, along
-with the \textit{k-means} placement strategy.
-We split our examination of global behaviors between the \textit{net} behavior
-(analogous to \textit{face}) and three stationary behaviors - namely
-\textit{circle}, \textit{polygon}, and \textit{multicircle}.
-We use a polygon with ten sides (a decagon) for our \textit{polygon} experiments,
-and we vary the final radius for multicircle based on the initial placement
-radius.
-When the placement radius is \textit{500}, we set the final radius to
-\textit{900}; when the placement radius is \textit{750}, we set the final radius
-to \textit{1100}.
-Finally, we pair the \textit{face}, \textit{offset momentum}, \textit{one step
-lookahead}, and \textit{coordinated} local behaviors with all the global behaviors
-and placement strategies.
-We place $300$ Reynolds-Vicsek agents inside a circle of radius $500$ at the center
-of a $5000x5000$ grid, varying the number of influencing agents from $10$ to $100$
-in intervals of $10$.
+Again, across the board, the genetic behaviors perform as well as \textit{face}
+or \textit{Couzin}, and outperform \textit{offset momentum}, \textit{one step
+lookahead}, and \textit{coordinated}.
+The only exception is in the \textit{Random 750} placement strategy, where all
+the genetic behaviors do worse.
+We are not sure what drives this effect, but we note that the \textit{Couzin}
+strategy also performs poorly with this placement strategy; these results may
+be related in some way.

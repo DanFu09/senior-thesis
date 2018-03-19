@@ -2,10 +2,10 @@
 \chapter{Conclusion}
 \label{ch:conclusion}
 
-\section{Barbara Conclusion}
 We have studied the problem of controlling flocks using influencing agents
 under two new, more adversarial environments with lower agent density, and
-have introduced some novel behaviors and placement strategies for these settings.
+have introduced some novel behaviors and placement strategies for these
+settings.
 Besides these new algorithms, we have found that, in low-density
 environments it is more important for influencing agents to
 \textit{maintain influence} than it is for them to rapidly turn their
@@ -16,38 +16,66 @@ We have found that a multistage approach that first embeds influencing
 agents in small flocks before attempting to steer these flocks to the goal
 direction can be effective in addressing some of these shortcomings.
 
-Future work could explore the design space of placement strategies and agent
-behaviors by applying machine learning techniques to this problem.
-Future work could also explore how to aggregate small flocks into one larger
-flock.
-Many of our behaviors result in multiple small flocks clustered around
-influencing agents that have converged in the sense that they are all facing the
-same direction, but remain disconnected from each other.
-An interesting challenge would be to develop algorithms to merge small flocks that
-start out with the same orientation, while maintaining flock composition.
+We have also presented an evolutionary algorithm that evolves new genetic
+algorithms for these influencing agents.
+We evolved on a genome based on a hand-constructed domain-specific language
+and found that many of the evolutionary algorithms incorporated non-trivial
+insights about the best way to be successful in these settings.
+However, we also found that the evolved behaviors could be difficult to parse.
+
+\section*{Future Work}
+There are a number of promising future directions that we could take from this
+work.
+We could explore the design space of genetic algorithms more deeply by
+evolving behaviors over different genomes, such as neural networks.
+We could also co-evolve different aspects of influencing agent behavior to help
+agents co-ordinate in previously unexpected ways; for example, we could
+introduce some form of communication between influencing agents, or co-evolve
+behaviors with placement strategies.
+
+Future work could also explore the design space of placement strategies and
+agent behaviors by applying machine learning techniques to this problem;
+reinforcement learning seems to be a particularly intriguing way to develop new
+behaviors for influencing agents.
+We would also like to explore the question of how to aggregate small flocks
+into one larger flock.
+Almost all of our behaviors result in multiple small flocks clustered around
+small numbers of influencing agents; these flocks have converged in the sense
+that they are all afcing the same direction, but they remain disconnected from
+each other.
+An interesting challenge would be to develop algorithms to merge small flocks
+that start out with the same orientation, while maintaining flock composition.
 For this challenge, a successful algorithm for an influencing agent must change
 the direction of the flock without losing individual Reynolds-Vicsek agents on
 the edge of the flock.
 
-\section{Radhika Conclusion}
-In this paper, we have presented an evolutionary algorithm that evolves
-ad hoc algorithms for influencing agents to control flocks of birds.
-We evolved a genome based on a hand-constructed domain-specific language
-and found that many of the evolutionary algorithms incorporated non-trivial
-insights about the best way to be successful in a wide range of settings.
-However, we also found that the evolved behaviors could be difficult to 
-parse and somewhat unpredictable, especially when used as parts of more
-complicated behaviors.
+Another direction would be to change the flocking dynamics and see how the
+various algorithms perform in that case.
+Our work has focused on a simplified version of the Reynolds flocking model and
+has only studied alignment dynamics.
+The original Reynolds model also includes avoidance and cohesion dynamics.
+These dynamics are important in real flocks, and in the future, the effects of
+including these dynamics should be explored.
 
-In the future, we plan on conducting a more thorough analysis of these
-genetic behaviors in a wider range of evaluation settings.
-We also wish to explore the design space of genetic algorithms more deeply
-by evolving behaviors over different genomes, such as neural networks.
-Another promising direction of research is to co-evolve different aspects
-of influencing agent behavior to help agents co-ordinate in previously
-unexpected ways.
-Finally, we could also explore the design space in a different way by
-taking techniques from reinforcement learning.
+%\section{Radhika Conclusion}
+%In this paper, we have presented an evolutionary algorithm that evolves
+%ad hoc algorithms for influencing agents to control flocks of birds.
+%We evolved a genome based on a hand-constructed domain-specific language
+%and found that many of the evolutionary algorithms incorporated non-trivial
+%insights about the best way to be successful in a wide range of settings.
+%However, we also found that the evolved behaviors could be difficult to 
+%parse and somewhat unpredictable, especially when used as parts of more
+%complicated behaviors.
+%
+%In the future, we plan on conducting a more thorough analysis of these
+%genetic behaviors in a wider range of evaluation settings.
+%We also wish to explore the design space of genetic algorithms more deeply
+%by evolving behaviors over different genomes, such as neural networks.
+%Another promising direction of research is to co-evolve different aspects
+%of influencing agent behavior to help agents co-ordinate in previously
+%unexpected ways.
+%Finally, we could also explore the design space in a different way by
+%taking techniques from reinforcement learning.
 
 % \section {Future work}
 % \label{sec:future}
