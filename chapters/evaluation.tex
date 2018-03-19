@@ -285,7 +285,19 @@ agents very quickly.
 As a result, the gains from the smarter local algorithm still outweigh the
 negative effects from losing influence.
 
-This effect is more pronounced for the \textit{multistep} behaviors.
+\begin{figure}
+    \includegraphics[width=\textwidth]{largesinglerowmultisteplog}
+    \caption{Average times to 50\% convergence for $300$ Reynolds-Vicsek agents
+    with $50$ influencing agents in the \textit{large} setting under variations
+    of the multistep behavior.
+    Smaller is better.}
+    \label{fig:largemultistep}
+\end{figure}
+This effect is more pronounced when those behaviors are paired with the
+\textit{multistep} behavior.
+Figure \ref{fig:largemultistep} shows variations on the \textit{multistep}
+behavior, wherein influencing agents adopt different behaviors after the number
+of Reynolds-Vicsek agents under control passes $T$.
 First, we note that the \textit{multistep} global behavior paired with the
 \textit{face} local behavior seems to slightly outperform the \textit{direct}
 and \textit{random} global behaviors, but the \textit{multistep} global behavior
