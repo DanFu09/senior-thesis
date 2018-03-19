@@ -5,7 +5,9 @@ one step lookahead, coordinated, couzin, and multistep + face;
 one comparing multistep + face to multistep + others
 
 Then have one graph comparing genetic algorithms to best hand-designed
-algorithms (probably multistep + face)
+algorithms (probably multistep + face) - DONE
 
 Herd setting stays mostly the same, but need to change some words in the
-figures
+figures - DONE
+
+Add Couzin to Fig 5.6
