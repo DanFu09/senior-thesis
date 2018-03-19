@@ -1,8 +1,10 @@
 Get rid of all references to global and local behaviors
 
+Error range for Figure 5.2
+
 Two graphs for large setting: one with face, offset momentum,
 one step lookahead, coordinated, couzin, and multistep + face;
-one comparing multistep + face to multistep + others
+one comparing multistep + face to multistep + others - DONE
 
 Then have one graph comparing genetic algorithms to best hand-designed
 algorithms (probably multistep + face) - DONE
@@ -10,4 +12,4 @@ algorithms (probably multistep + face) - DONE
 Herd setting stays mostly the same, but need to change some words in the
 figures - DONE
 
-Add Couzin to Fig 5.6
+Add Couzin to Fig 5.6 - DONE
