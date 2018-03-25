@@ -56,7 +56,7 @@ the number of influencing agents from $10$ to $100$ in intervals of $10$.
 
 To evaluate the contributions of influencing agents in the \textit{herd}
 setting, we measure a slightly different metric.
-Since we have two qualitatively different categories of global behaviors (net
+Since we have two qualitatively different categories of behaviors (net
 behaviors vs. stationary behaviors), the number of agents facing the same
 direction is irrelevant, since the stationary behaviors rotate the agents around
 the origin (in fact, if the Reynolds-Vicsek agents are all facing the same
@@ -71,7 +71,7 @@ We examine the three circular placement strategies, \textit{circle-border},
 \textit{circle-random}, and \textit{circle-grid}, with two placement radii,
 \textit{500} and \textit{750}, along with the \textit{k-means} placement
 strategy.
-We split our examination of global behaviors between the \textit{net} behaviors
+We split our examination of behaviors between the \textit{net} behaviors
 (the same behaviors as used in the \textit{large} setting, minus the
 \textit{multistep} behavior) and three stationary behaviors - namely
 \textit{circle}, \textit{polygon}, and \textit{multicircle}.
@@ -313,7 +313,7 @@ When interactions are rare, the \textit{offset momentum}, \textit{one step
 lookahead}, and \textit{coordinated} behaviors have difficulties changing the
 orientation of existing flocks quickly before losing influence.
 As a result, the \textit{multistep} behavior takes an order of magnitude longer
-to reach convergence when paired with the other local behaviors.
+to reach convergence when paired with the other behaviors.
 This does not happen with the \textit{Couzin} variation of the
 \textit{multistep} behavior, since the \textit{Couzin} variation can maintain
 influence (note that convergence still takes slightly longer, however).
@@ -477,7 +477,7 @@ to \textit{one step lookahead} when there is only a single influencing agent.
 
 In each run, the population converged to one or two best genomes that remained
 in the seed population for every generation.
-These best genomes consistently outperformed the hand-constructed local behaviors
+These best genomes consistently outperformed the hand-constructed behaviors
 taken from the literature.
 However, the average angle difference across the population stayed relatively
 high throughout the entire simulation, since the majority of the population
@@ -538,7 +538,7 @@ A few screenshots of this process are shown in Figure $\ref{fig:g1}$.
     \includegraphics[width=0.32\textwidth]{westgenetic01}
     \includegraphics[width=0.32\textwidth]{westgenetic02}
     \includegraphics[width=0.32\textwidth]{westgenetic03}
-    \caption{Screenshots of the G1 local behavior when trying to turn $6$
+    \caption{Screenshots of the G1 behavior when trying to turn $6$
     Reynolds-Vicsek agents $180$ degrees to the east.
     Instead of trying to turn all $6$ neighbors at once, as the \textit{one step
     lookahead} behavior does, the genetic behavior ``gives up" on some neighbors
