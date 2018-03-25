@@ -1,0 +1,27 @@
+%!TEX root = ../dissertation.tex
+\chapter{The Coordinated Behavior}
+\label{ch:AppendixB}
+
+We present a more detailed explanation of Genter and Stone's Coordinated
+Behavior \cite{genter201612steplookahead}.
+
+The Coordinated Behavior aims to pair up influencing agents that share a large
+number of Reynolds-Vicsek agents in their neighborhoods and have the pairs
+jointly run a \textit{one step lookahead} algorithm.
+The only difficult portion in this behavior is forming the pairs; once they are
+formed, \textit{one step lookahead} can be used without modification.
+Absent any optimizations, this is an $O(mn^2)$ [NOTE MAKE THIS A BIG O]
+algorithm, where $n$ is the number of influencing agents, and $m$ is the number
+of Reynolds-Vicsek agents; the $n^2$ factor comes from the fact that there are
+only $O(n^2)$ possible pairings, and the $m$ factor reflects the worst case,
+where all the agents are clustered in a very tight space.
+The Coordinated algorithm optimizes this search slightly by only considering
+influencing agents that can share Reynolds-Vicsek agents as neighbors, i.e.
+only those influencing agent pairs which are less than twice the neighborhood
+radius away from each other.
+Then the algorithm simply iterates through all pairings and chooses the one
+that maximizes the number of Reynolds-Vicsek agents that are in the
+intersection of the neighborhoods of two influencing agents.
+Although simple implementations of this algorithm may require a global
+controller to implement, this algorithm can theoretically be done in a
+completely decentralized manner.
