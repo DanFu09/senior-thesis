@@ -16,9 +16,9 @@ genter2016facegoalfacecurrent, genter201612steplookahead}.
 This prior literature has studied a number of placement strategies and
 influencing agent behaviors, including questions of how best to join or leave
 a flock in real scenarios.
-Genter's PhD thesis also presents results from simulations with a slightly
-different implementation of Reynold's flocking model, as well as physical
-experiments with these algorithms in a small RoboCup setting.
+Genter's PhD thesis also presents results from simulations with variations on
+Reynold's flocking model, as well as physical experiments with these algorithms
+in a small RoboCup setting.
 
 This work has studied influencing agents in a number of contexts, including
 convergence in a small setting and steering a small, dense flock around an
@@ -40,13 +40,13 @@ Genter and Stone introduce a number of behaviors for influencing agents and
 compare them against two baselines: \textit{face} and \textit{offset momentum}.
 In \textit{face}, influencing agents simply face a predetermined goal direction
 at all times; in \textit{offset momentum}, influencing agents look at their
-neighbors, calculate an average velocity vector, and choose a direction to
+neighbors, calculate their average velocity vector, and choose a direction to
 offset that velocity from the predetermined goal direction.
 The most promising behavior they study is \textit{one step lookahead}; in this
 behavior, influencing agents cycle through choices for every direction they
 can take, and simulate one step of their neighbors for every choice they take.
 The agents pick the choice that minimizes the average difference of their
-neighbors from the goal direction.
+neighbors from the goal direction after the one step.
 Not surprisingly, \textit{one step lookahead} beats the baseline behaviors in
 their experiments.
 We will see that this is not the case in low-density settings and discuss the
@@ -81,10 +81,10 @@ conditions, and that in the presence of a single agent with fixed orientation
 fixed agent's orientation.
 This provides important context for Genter and Stone's work and the work that
 we present here; when the setting is toroidal, convergence is guaranteed, so
-the interesting question how fast we can reach convergence.
+the interesting question is how fast we can reach convergence.
 
 Couzin et. al. \cite{couzin2005} have studied the design of influencing agents
-for flocking as well, albeit with a slightly different model.
+for flocking as well, albeit with a slightly different flocking model.
 They have proposed an influencing behavior wherein influencing agents adopt
 orientations ``in between" their desired goal orientation and the orientations
 of their neighbors, in order to still influence their neighbors while not
@@ -95,8 +95,8 @@ flocking model to see how well it performs in our settings.
 
 Han et. al. have \cite{han2010teleporting} published a series of papers showing
 how to align a group of agents in the same direction.
-This literature has assumed a single influencing agent with infinite speed, and
-has used this property to construct a behavior that has the influencing agent
+This literature assumes a single influencing agent with infinite speed, and
+uses this property to construct a behavior that has the influencing agent
 fly around and correct the orientation of agents one at a time.
 The result is that the Reynolds-Vicsek agents all eventually converge to the
 target direction, but are not connected to each other.
@@ -181,11 +181,11 @@ a team for the RoboCup97 competition \cite{lukeRoboCup97}.
 One major difference is that our language is simpler than his, since the
 virtual soccer players are capable of much more complex behaviors than our
 flocking agents.
-As a result, his language contained many mroe primitives than the one we
+As a result, his language contains many more primitives than the one we
 present in our work.
-The execution model used by the RoboCup players was designed to simplify the
-work to be done by the evolved program without unnecessarily biasing it toward
-any particular strategy.
+That being said, the execution model used by the RoboCup players is designed to
+simplify the work to be done by the evolved program without unnecessarily
+biasing it toward any particular strategy.
 We have similar goals when designing our own execution model and language.
 
 Much work has been done on developing techniques for evolving programs in

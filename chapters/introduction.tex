@@ -143,8 +143,6 @@ We find that the genetic behaviors can both encourage faster convergence in the
 short term while still maintaining influence over the long-term.
 As a result, they can perform as well as the best hand-constructed algorithms.
 However, they can also be difficult to understand and reason about.
-In particular, some genetic behaviors work very well when paired with certain
-global behaviors, but experience catastrophic failures when paired with others.
 
 The main contributions of this work are:
 \begin{itemize}
@@ -154,11 +152,12 @@ The main contributions of this work are:
     behaviors to adapt to the difficulties presented by these new settings.
     \item Analysis of the major differences in influencing agent priorities in
     low-density vs. high-density settings.
-    \item A functional language to define ad hoc influencing agent behaviors.
-    \item An evolutionary algorithm to evolve and evaluate candidate programs in
-    this language.
-    \item Analysis of the efficacy of the programs evolved by this algorithm and
-    their strengths and shortcomings relative to hand-constructed algorithms.
+    \item A functional language to define influencing agent behaviors.
+    \item An evolutionary algorithm to evolve and evaluate candidate programs
+    in this language.
+    \item Analysis of the efficacy of the programs evolved by this algorithm
+    and their strengths and shortcomings relative to hand-constructed
+    algorithms.
 \end{itemize}
 
 The rest of this thesis is organized as follows: \S\ref{ch:background}

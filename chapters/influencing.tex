@@ -46,10 +46,10 @@ genterthesis}.
     \centering
     \includegraphics[width=\textwidth]{placements}
     \caption{The different placement strategies we explore in this paper.
-    Red agents are influencing agents, and white agents are Reynolds-Viscek
+    Red agents are influencing agents, and white agents are Reynolds-Vicsek
     agents.
     Note that k-means is the only placement strategy where the placement of
-    influencing agents depends on placement of Reynolds-Viscek agents.}
+    influencing agents depends on placement of Reynolds-Vicsek agents.}
     \label{fig:placements}
 \end{figure}
 We note that the question of how to maneuver influencing agents to reach the
@@ -67,7 +67,7 @@ influencing agents on the lattice points.
 This strategy ensures regular placement of influencing agents throughout the
 grid.
 The k-means placement strategy uses a k-means clustering algorithm on the
-positions of Reynolds-Viscek agents in the simulation space.
+positions of Reynolds-Vicsek agents in the simulation space.
 This strategy finds a cluster for each influencing agent by setting $k$ equal
 to the number of influencing agents, and then places an influencing agent at
 the center of each cluster.
@@ -183,17 +183,17 @@ convergence, but at the cost of potentially breaking up the flock.
 
 Finally, the \textit{multistep} behavior is a novel contribution and adopts
 what we call a ``follow-then-influence" behavior.
-In the initial stage, influencing agents simply behave like normal Reynolds-Viscek 
+In the initial stage, influencing agents simply behave like normal Reynolds-Vicsek 
 agents; as a result, they easily join flocks and become distributed throughout
 the grid.
-At the same time, each influencing agent estimates how many Reynolds-Viscek agents
+At the same time, each influencing agent estimates how many Reynolds-Vicsek agents
 are path-connected to it; here, we define two agents as being path-connected if
 there is a path between them, where edges are created by two agents being in
 each other's neighborhood.
 The astute reader will note that an accurate calculation requires a global view
 from every influencing agent, since paths may extend arbitrarily far away from
 the influencing agent.
-In our algorithm, we only consider Reynolds-Viscek agents that are within the
+In our algorithm, we only consider Reynolds-Vicsek agents that are within the
 sensing radius of the influencing agents.
 Given their local estimates, the influencing agents compute a global sum of all
 their estimates; once that sum passes over some threshold $T$, the influencing
@@ -215,13 +215,13 @@ We study these pairings to see how effective they are.
 For the \textit{herd} setting, we divide our behaviors into two categories:
 \textit{net} behaviors and \textit{stationary} behaviors.
 As a reminder, in the \textit{herd} setting, the simulation space is
-non-toroidal, and all the Reynolds-Viscek agents start in a circle in the
+non-toroidal, and all the Reynolds-Vicsek agents start in a circle in the
 center.
 In this setting, flock formation is not guaranteed, so we are interested in
 using influencing agents to instigate flocking behavior.
 There are two different choices we can make; we can either try to force the
-Reynolds-Viscek agents to stay in the center (\textit{stationary} behaviors),
-or we can let the influencing agents direct the Reynolds-Viscek agents away
+Reynolds-Vicsek agents to stay in the center (\textit{stationary} behaviors),
+or we can let the influencing agents direct the Reynolds-Vicsek agents away
 from their initial starting position (\textit{net} behaviors).
 Since all our agents have a constant speed, the former is much more difficult
 than the latter, so we must evaluate them separately.
@@ -243,9 +243,9 @@ different radii.
 The \textit{multicircle} behavior is analogous to the \textit{multistep}
 behavior from \textit{large}.
 The influencing agents start out by circling around the origin and wait for
-Reynolds-Viscek agents to enter their neighborhood.
-Once they detect Reynolds-Viscek agents in their neighborhood, they adopt a
-``following" behavior where they act like Reynolds-Viscek agents to integrate
+Reynolds-Vicsek agents to enter their neighborhood.
+Once they detect Reynolds-Vicsek agents in their neighborhood, they adopt a
+``following" behavior where they act like Reynolds-Vicsek agents to integrate
 into a small flock.
 They continue this following stage until reaching a final radius $r_F$, at which
 point they again adopt a circling behavior.
@@ -267,10 +267,10 @@ model in the literature.
 %feed to the local component and how the influencing agents might coordinate to
 %decide on a desired orientation.
 %For example, one behavior might be for the influencing agents to circle around
-%the center of a grid and get the Reynolds-Viscek agents to circle with them.
+%the center of a grid and get the Reynolds-Vicsek agents to circle with them.
 %The global component would compute the desired orientation necessary at each
 %step to maintain the circling behavior, and the local component would compute
-%which exact direction to face to get the Reynolds-Viscek agents to face the
+%which exact direction to face to get the Reynolds-Vicsek agents to face the
 %desired orientation at that step.
 %For grammatical sanity, we will refer to different candidates for local and
 %global components as ``local behaviors" and ``global behaviors" throughout the
@@ -334,27 +334,27 @@ model in the literature.
 %\end{table}
 %
 %The \textit{random} global behavior is very similar, but it directs influencing
-%agents in a random direction when they have no Reynolds-Viscek neighbors.
+%agents in a random direction when they have no Reynolds-Vicsek neighbors.
 %We introduced this behavior as a response to interactions where an influencing
-%agent is almost successful in changing the direction of a group of Reynolds-Viscek
+%agent is almost successful in changing the direction of a group of Reynolds-Vicsek
 %agents, but gets separated before it is completely successful.
-%In these cases, the Reynolds-Viscek agents are left on a trajectory that is almost
+%In these cases, the Reynolds-Vicsek agents are left on a trajectory that is almost
 %parallel to the goal direction; as a result, further interactions with
 %influencing agents are rare.
 %
 %The \textit{multistep} behavior is a novel contribution and adopts what we call
 %a ``follow-then-influence" behavior.
-%In the initial stage, influencing agents simply behave like normal Reynolds-Viscek 
+%In the initial stage, influencing agents simply behave like normal Reynolds-Vicsek 
 %agents; as a result, they easily join flocks and become distributed throughout
 %the grid.
-%At the same time, each influencing agent estimates how many Reynolds-Viscek agents
+%At the same time, each influencing agent estimates how many Reynolds-Vicsek agents
 %are path-connected to it; here, we define two agents as being path-connected if
 %there is a path between them, where edges are created by two agents being in
 %each other's neighborhood.
 %The astute reader will note that an accurate calculation requires a global view
 %from every influencing agent, since paths may extend arbitrarily far away from
 %the influencing agent.
-%In our algorithm, we only consider Reynolds-Viscek agents that are within the
+%In our algorithm, we only consider Reynolds-Vicsek agents that are within the
 %sensing radius of the influencing agents.
 %Given their local estimates, the influencing agents compute a global sum of all
 %their estimates; once that sum passes over some threshold $T$, the influencing
@@ -367,22 +367,22 @@ model in the literature.
 %For the \textit{herd} setting, we divide our global behaviors into two
 %categories: \textit{net} behaviors and \textit{stationary} behaviors.
 %As a reminder, in the \textit{herd} setting, the simulation space is
-%non-toroidal, and all the Reynolds-Viscek agents start in a circle in the
+%non-toroidal, and all the Reynolds-Vicsek agents start in a circle in the
 %center.
 %In this setting, flock formation is not guaranteed, so we are interested in
 %using influencing agents to instigate flocking behavior.
 %There are two different choices we can make; we can either try to force the
-%Reynolds-Viscek agents to stay in the center (\textit{stationary} behaviors),
-%or we can let the influencing agents direct the Reynolds-Viscek agents away
+%Reynolds-Vicsek agents to stay in the center (\textit{stationary} behaviors),
+%or we can let the influencing agents direct the Reynolds-Vicsek agents away
 %from their initial starting position (\textit{net} behaviors).
 %Since all our agents have a constant speed, the former is much more difficult
 %than the latter, so we must evaluate them separately.
 %
 %The \textit{net} behavior is equivalent to the \textit{direct} behavior; there
 %is a single pre-determined goal direction, and the influencing agents try to
-%direct the Reynolds-Viscek agents towards the goal direction.
+%direct the Reynolds-Vicsek agents towards the goal direction.
 %We call it a net behavior because it looks as if the influencing agents are
-%``catching" the Reynolds-Viscek agents in a net.
+%``catching" the Reynolds-Vicsek agents in a net.
 %
 %We study three \textit{stationary} behaviors: \textit{circle}, \textit{polygon},
 %and \textit{multicircle}.
@@ -395,9 +395,9 @@ model in the literature.
 %The \textit{multicircle} behavior is analogous to the \textit{multistep} behavior
 %from \textit{large}.
 %The influencing agents start out by circling around the origin and wait for
-%Reynolds-Viscek agents to enter their neighborhood.
-%Once they detect Reynolds-Viscek agents in their neighborhood, they adopt a
-%``following" behavior where they act like Reynolds-Viscek agents to integrate
+%Reynolds-Vicsek agents to enter their neighborhood.
+%Once they detect Reynolds-Vicsek agents in their neighborhood, they adopt a
+%``following" behavior where they act like Reynolds-Vicsek agents to integrate
 %into a small flock.
 %They continue this following stage until reaching a final radius $r_F$, at which
 %point they again adopt a circling behavior.
@@ -414,8 +414,8 @@ model in the literature.
 %One variation of the \textit{net} behavior was equivalent to the \textit{random}
 %global behavior from the large setting.
 %The other was similar to the stationary \textit{circle} behavior; influencing
-%agents would trace a circle until encountering Reynolds-Viscek agents,
-%whereupon they would influence the Reynolds-Viscek agents towards the goal
+%agents would trace a circle until encountering Reynolds-Vicsek agents,
+%whereupon they would influence the Reynolds-Vicsek agents towards the goal
 %direction.
 %The variations on the \textit{multicircle} behavior included different final
 %radii from those presented in $\S\ref{sec:evaluation}$, as well as a variation
@@ -435,7 +435,7 @@ model in the literature.
 % \end{figure}
 % Agents start by tracing a circle around the origin of radius $r_P$; $r_P$ is
 % defined by the agent's placement under the placement strategy.
-% Once the agents come into contact with Reynolds-Viscek agents, they follow the Reynolds-Viscek
+% Once the agents come into contact with Reynolds-Vicsek agents, they follow the Reynolds-Vicsek
 % agents until they reach a threshold radius $r_T$.
 % From there, they trace a transition path until they are a radius $r_F$ from the
 % origin, where they settle into a final trajectory tracing the circle of radius
@@ -551,7 +551,7 @@ $[-1, 1]$.
 For example, knowing the index of the current neighbor allows for creating a
 function that gives more weight to closer neighbors (those with higher indices);
 knowing the distance to the current neighbor combined with the conditional
-expression, gez, allows for creating programs that ignore neighbors that are
+expression, $gez$, allows for creating programs that ignore neighbors that are
 too close or too far away;
 and the product of the influence variable and some other value can be added to
 the accumulator to calculate an average over all neighbors.
@@ -616,10 +616,16 @@ node and new children may need to be randomly generated if the new node has
 more than the old node.
 
 We start by randomly generating each member of the population.
-We evaluate each member with $6$ Reynolds-Viscek agents in a small test setting,
-calculating the average absolute difference in angle of the Reynolds-Viscek
+We evaluate each member with $6$ Reynolds-Vicsek agents in a small test setting,
+calculating the average absolute difference in angle of the Reynolds-Vicsek
 agents from the goal direction after $100$ steps.
-This gives a positive fitness value that we wish to optimize towards zero.
+To keep genomes small, we also add a small penalty for the number of nodes in
+the genome, modulated by a hyperparameter $\alpha$.
+This gives the following cost function that we wish to optimize towards zero:
+\[ \sum_{i\in A} |\theta_i - \theta_{east}| + \alpha N_{nodes}, \]
+where $A$ is the set of $6$ Reynolds-Vicsek agents, $N_{nodes}$ is the number
+of nodes in the genome, and $\alpha$ is a regularization factor.
+
 In each generation, we choose the top $N$ genomes to use as a seed population
 for the next generation, where $N$ is a hyperparameter set by the user.
 We add those $N$ genomes into the new population.

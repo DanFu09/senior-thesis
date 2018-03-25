@@ -9,7 +9,7 @@ Nulla facilisi. In vel sem. Morbi id urna in diam dignissim feugiat. Proin moles
 
 \section{Experimental Setup}
 
-We extended the MASON simulator to run our experiments.\cite{luke05mason}
+We extended the MASON simulator to run our experiments\cite{luke05mason}.
 We used the default parameters for the Flocking simulation that is included
 with the MASON simulator, except without any randomness, cohesion, avoidance,
 or dead agents.
@@ -24,8 +24,8 @@ In order to observe the marginal contribution of influencing agents
 in future experiments, we start our investigation of all three of our settings
 by studying flock formation in those environments without any influencing
 agents.
-We use two metrics to evaluate flock formation: average number of flocks
-formed and average proportion of lone agents at each time step.
+We use two metrics to understand flock formation: average number of separate
+flocks and average proportion of lone agents at each time step.
 
 In the \textit{large} setting, we test on a toroidal $1000\times1000$ grid with
 agents that have a neighborhood radius of $10$.
@@ -40,8 +40,8 @@ We run both sets of simulations for $6000$ time steps.
 Next, we evaluate the contributions of influencing agents.
 We first evaluate all our hand-designed algorithms.
 Then we use genetic programming to evolve some new behaviors, and compare these
-behaviors against a subset of the hand-designed algorithms to get a sense of
-how well they perform.
+behaviors against a the hand-designed algorithms to get a sense of how well
+they perform.
 
 To evaluate the contributions of influencing agents in the \textit{large}
 setting, we measure time to convergence.
@@ -81,8 +81,6 @@ placement radius.
 When the placement radius is \textit{500}, we set the final radius to
 \textit{900}; when the placement radius is \textit{750}, we set the final
 radius to \textit{1100}.
-Finally, we pair the all our local behaviors with all the global behaviors and
-placement strategies.
 We place $300$ Reynolds-Vicsek agents on the grid and again vary the number of
 influencing agents from $10$ to $100$ in intervals of $10$.
 
@@ -120,14 +118,8 @@ between generations, and it became difficult for the algorithm to find better
 genomes.
 We ultimately settled on a deterministic test to both reduce this variability
 and to allow for memoization to make our algorithm run faster.
-
-Finally, we add a small penalty for the number of nodes in the genome.
-This gives the following cost function:
-\[ \sum_{i\in A} |\theta_i - \theta_{east}| + \alpha N_{nodes}, \]
-where $A$ is the set of $6$ Reynolds-Vicsek agents, $N_{nodes}$ is the number
-of nodes in the genome, and $\alpha$ is a regularization factor.
-In our experiments, we set $\alpha=0.1$ to allow development of complexity but
-to prevent blow-out.
+Finally, we set our regularization factor $\alpha$ to $0.1$ to allow
+development of complexity while also preventing blowout.
 
 \section{Results}
 \subsection{No Influencing Agents}
@@ -210,8 +202,8 @@ numbers of influencing agents were similar (the major difference being that
 when there are more influencing agents, convergence happens faster).
 The results for the \textit{Couzin} behavior are shown at $\omega = 0.5$; this
 value was experimentally shown by Couzin et. al. to be the highest value at
-this proportion of influencing agent that would not consistently break up the
-flock.
+this proportion of influencing agents to Reynolds-Vicsek agents that would not
+consistently break up the flock.
 Note that smaller is better in these graphs.
 \begin{figure}
     \includegraphics[width=\textwidth]{largesinglerow}
@@ -268,7 +260,7 @@ the same flock, since influencing agents travel at the same speed\footnote{
 There are some approaches which remove this speed constraint from
 influencing agents \cite{han2010teleporting}.
 However, this allows for unrealistic behaviors wherein influencing agents travel
-to one Reynolds-Vicsek agent and a time and change the direction of the
+to one Reynolds-Vicsek agent at a time and change the direction of the
 individual Reynolds-Vicsek agent before moving on to the next one.
 This results in Reynolds-Vicsek agents that are all facing the same direction,
 but that are often not path-connected.}
@@ -292,12 +284,12 @@ measuring time to convergence, because it simply takes longer for influencing
 agents to turn the Reynolds-Vicsek agents.
 
 The \textit{multistep} behavior does not suffer from the same problem; it
-can both maintain influence and influence Reynolds-Vicsek agents and so
+can both maintain influence and effectively turn Reynolds-Vicsek agents and so
 outperforms all the other behaviors by a couple hundred steps (less so under
 the \textit{grid} placement strategy).
 
 When the \textit{multistep} behavior is paired with the other behaviors,
-however, the effects of losing influence are magnified.
+it magnifies their inability to maintain influence.
 \begin{figure}
     \includegraphics[width=\textwidth]{largesinglerowmultisteplog}
     \caption{Average times to 50\% convergence for $300$ Reynolds-Vicsek agents
@@ -452,7 +444,7 @@ but not always.
 
 \subsection{Evolutionary Experiments}
 Next, we report on the results of our evolutionary experiments.
-We ran a total of $5$ evolutionary runs.
+We executed a total of $5$ evolutionary runs.
 The first four had population size $25$ and ran for $50$ generations, while the
 last one had population size $100$ and ran for $300$ generations.
 For the first four runs, we selected the top $10$ genomes to seed the next
@@ -465,7 +457,7 @@ The average angle difference across the population and the angle difference of
 the best genome in each generation are shown in Figure $\ref{fig:genetic_runs}$.
 We also show performances of \textit{face}, \textit{offset momentum},
 \textit{one step lookahead}, and \textit{Couzin} for comparison.
-We do now show \textit{coordinated}, since \textit{coordinated} is equivalent
+We do not show \textit{coordinated}, since \textit{coordinated} is equivalent
 to \textit{one step lookahead} when there is only a single influencing agent.
 \begin{figure}
     \centering
@@ -538,8 +530,8 @@ influencing agent face east as well.
 In addition, they pick up some gains from the north and south starting conditions
 by initially picking up more neighbors than the baseline conditions.
 They pick up some major gains in the west case, where they intersect a few of
-the neighbors to their east side and lead them towards the target direction
-over the course of the next $100$ steps.
+the neighbors behind them and lead them towards the target direction over the
+course of the next $100$ steps.
 A few screenshots of this process are shown in Figure $\ref{fig:g1}$.
 \begin{figure}
     \centering
@@ -608,7 +600,7 @@ better than, the \textit{face} behavior.
 They all strongly outperform the \textit{one step lookahead} and
 \textit{coordinated} behaviors, and slightly outperform the
 \textit{offset momentum} behavior.
-None perform as well as the \textit{multistep} behavior, then $\textit{G1}$
+None perform as well as the \textit{multistep} behavior, though $\textit{G1}$
 comes close.
 
 %When paired with the \textit{random} global behavior, however, the story changes
