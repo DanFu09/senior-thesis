@@ -163,8 +163,8 @@ These informed agents are analogous to our influencing agents.
 They proposed an algorithm where influencing agents chose an orientation in
 between the goal direction and the direction they would travel if they were
 regular flocking agents.
-This algorithm is parameterized by a value $\omega$ and works as follows.
-Consider an influencing agent with goal orientation $\theta^*$; let this be
+This algorithm is parameterized by a value $\omega$ and works as follows:
+consider an influencing agent with goal orientation $\theta^*$; let this be
 represented by a unit vector $\vec{v}^*$.
 Suppose the influencing agent's orientation at time $t$ is given by
 $\theta(t)$; let this be represented by a unit vector $\vec{d}(t)$.
@@ -187,8 +187,8 @@ agents; as a result, they easily join flocks and become distributed throughout
 the grid.
 At the same time, each influencing agent estimates how many Reynolds-Vicsek agents
 are path-connected to it; here, we define two agents as being path-connected if
-there is a path between them, where edges are created by two agents being in
-each other's neighborhood.
+there is a path between them, where edges are created by two agents being
+within each other's neighborhood radius.
 The astute reader will note that an accurate calculation requires a global view
 from every influencing agent, since paths may extend arbitrarily far away from
 the influencing agent.
@@ -202,10 +202,10 @@ are locally connected to influencing agents, and from there adopt the
 We choose $\overline{\theta}$ to minimize the amount that each influencing 
 agent needs to turn its flock on average.
 
-We also explore some variations on the \textit{multistep} behavior; notice that
-once the sum of connected agents passes the threshold $T$, any of the other
-behaviors studied can be used to turn the Reynolds-Vicsek agents towards the
-final goal direction $\overline{\theta}$.
+We also explore some variations on the \textit{multistep} behavior by noticing
+that once the sum of connected agents passes the threshold $T$, any of the
+other behaviors studied can be used to turn the Reynolds-Vicsek agents towards
+the final goal direction $\overline{\theta}$.
 In other words, the \textit{multistep} behavior can be paired with any other
 behavior.
 We study these pairings to see how effective they are.
@@ -248,10 +248,10 @@ Once they detect Reynolds-Vicsek agents in their neighborhood, they adopt a
 into a small flock.
 They continue this following stage until reaching a final radius $r_F$, at which
 point they again adopt a circling behavior.
-In addition to building influence by following before influencing, this behavior
-also makes maintaining influence easier; since the final radius is larger than
-the original radius, the final path turns less sharply than if the influencing
-agents had stayed at their original radius.
+In addition to building up influence by following flocks before attempting to
+influence them, this behavior also makes maintaining influence easier; since
+the final radius is larger than the original radius, the final path turns less
+sharply than if the influencing agents had stayed at their original radius.
 To the best of our knowledge, this is the first presentation of such a
 multi-stage behavior to induce circling behavior under the Reynolds-Vicsek
 model in the literature.
@@ -501,8 +501,8 @@ return acc
 The order in which neighbors are evaluated is meaningful, since the evolved
 functions are not necessarily commutative.
 We choose to evaluate them in decreasing order of distance to ensure that the
-results of programs that do not use the accumulator value are determined by the
-nearest neighbor of the influencing agent.
+results of programs that do not use the accumulator value consider the
+influencing agent's nearest neighbor.
 If the influencing agent has no neighbors, its calculated heading is equal to
 its initial accumulator value.
 A genome is comprised of an abstract syntax tree for the folding function and
@@ -526,7 +526,7 @@ Although allowing the language to have lists and loops would increase its
 expressiveness, we opted to keep the language simple while still expressive
 enough to allow the genetic algorithm to develop complex behaviors.
 We also chose to leave out other possible capabilities such as mechanisms for
-storing state other than the accumulator value and communicating with other
+storing state other than the accumulator value and for communicating with other
 influencing agents.
 
 The expressions that make up the domain specific language are given in table
@@ -612,7 +612,7 @@ available in the language.
 The children of the old node are made children of the new node in random order,
 although children may be lost if the new node has fewer children than the old
 node and new children may need to be randomly generated if the new node has
-more than the old node.
+more children than the old node.
 
 We start by randomly generating each member of the population.
 We evaluate each member with $6$ Reynolds-Vicsek agents in a small test setting,
@@ -631,7 +631,7 @@ We add those $N$ genomes into the new population.
 Then, while the size of the new population is smaller than the size of the
 old population, we repeat the following:
 \begin{enumerate}
-    \item Flip a coin to decide whether to create a new member(s) by mutation
+    \item Flip a coin to decide whether to create (a) new member(s) by mutation
     or crossover.
     \item If mutation, randomly select one genome from the seed population,
     mutate it, and add it to the new population.

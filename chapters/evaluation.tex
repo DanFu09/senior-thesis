@@ -185,9 +185,9 @@ vastly decreases, so most of the flocks formed from the first stage never end up
 merging with other flocks.
 This is reflected in the plateaus of both the total number of flocks and the total
 number of lone agents.
-Some small artifacts in the graphs are worth mentioning; since the agents start off
-in a much smaller area than in the \textit{large} setting, many of the agents
-start out with a non-zero number of neighbors.
+One small artifact in the metric is worth mentioning: since the agents start
+off in a much smaller area than in the \textit{large} setting, many of the
+agents start out with a non-zero number of neighbors.
 This causes the initial value of the average number of flocks to be non-zero, and
 the average number of lone agents to be less than the total number of agents.
 
@@ -257,7 +257,7 @@ the influencing agent's chosen orientation takes it away from the center of the
 flock of Reynolds-Vicsek agents, causing it to lose influence.
 Once the influencing agent has lost influence, it is difficult to catch up to
 the same flock, since influencing agents travel at the same speed\footnote{
-There are some approaches which remove this speed constraint from
+There are some approaches that remove this speed constraint from
 influencing agents \cite{han2010teleporting}.
 However, this allows for unrealistic behaviors wherein influencing agents travel
 to one Reynolds-Vicsek agent at a time and change the direction of the
@@ -381,8 +381,7 @@ Thus, we analyze the net behaviors separately from the stationary behaviors.
 \subsubsection{Net}
 Again, we find that the \textit{face} behavior tends to outperform the
 \textit{offset momentum}, \textit{one step lookahead}, and \textit{coordinated}
-behaviors.
-Again, we attribute this to the tendency of the \textit{offset momentum},
+behaviors; we attribute this to the tendency of the \textit{offset momentum},
 \textit{one step lookahead}, and \textit{coordinated} behaviors to lose
 influence over time.
 We note that the effect is not as pronounced here as in our \textit{large}
@@ -395,7 +394,7 @@ slower.
 
 In contrast to the \textit{large} experiments, we do find that the placement
 strategy has a major effect on the efficacy of the net behavior.
-Again, this has to do with density of influencing agents.
+This also has to do with density of influencing agents.
 For example, notice that \textit{Border 750} (place the influencing agents in a
 circle about the origin with radius $750$) vastly underperforms the other
 placement strategies.
@@ -481,7 +480,7 @@ These best genomes consistently outperformed the hand-constructed behaviors
 taken from the literature.
 However, the average angle difference across the population stayed relatively
 high throughout the entire simulation, since the majority of the population
-were the results of random mutation or crossover from the seed population.
+was the result of random mutation or crossover from the seed population.
 In many cases, the new children perform very poorly, driving the average angle
 difference up.
 In the last run, with a population of size $100$, there is a sharp drop in the

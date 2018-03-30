@@ -11,8 +11,8 @@
 
 %\section{Barbara Intro}
 
-Across nature, flocking behavior can be found in a variety of species, from 
-flocks of birds, to herds of quadrupeds, schools of fish, or swarms of insects.
+Across nature, flocking behavior can be found in a variety of species, from
+flocks of birds, to herds of quadrupeds, schools of fish, and swarms of insects.
 In such species, groups exhibiting collective behavior emerge from simple, 
 local rules \citep{sumpter2010collective}.
 An open question is whether externally-controlled influencing agents can be 
@@ -22,20 +22,22 @@ Previous work \cite{genter2013backsearch, genter2013visionstationary,
 genter2014neighborsorientherd, genter2015placement, genter2016facegoalfacecurrent, 
 genter201612steplookahead, genterthesis}
 has explored the use of influencing agents to guide flocking 
-agents to face a target direction in small and toroidal settings.
+agents to face a target direction in small and toroidal\footnote{In a toroidal
+environment, agents that exit the simulation space from one side immediately
+re-appear on the other side} settings.
 In such settings, agent density is high, so interactions are common, and flock
 formation is rapid.
 In this work, we build upon past work by studying lower-density settings where
 interactions are rarer and flock formation is more difficult.
-As a result, influencing agent priorities must change in these settings to be
-successful.
+As a result, influencing agent priorities must change in low-density settings
+to be successful.
 We tackle the problems introduced by these new settings by introducing new
 influencing agent strategies and by using genetic programming to automatically
 explore a wide range of the solution space.
 
 Low-density settings are important to study because they capture dynamics in
 situations where flocking may not occur naturally, but where we might want to
-instigate flocking behavior; imagine a herd of buffalo that is currently
+instigate flocking behavior: imagine a herd of buffalo that is currently
 grazing, or a spooked flock of birds where individual agents fail to
 coordinate.
 It may also have implications for coordination in low-density swarms of
@@ -66,10 +68,10 @@ Genter and Stone \cite{genter2013backsearch, genter2013visionstationary,
 genter2014neighborsorientherd, genter2015placement, genter2016facegoalfacecurrent, 
 genter201612steplookahead, genterthesis}.
 Genter and Stone study influencing agent placement and behavior in small,
-toroidal environments.\footnote{In a toroidal environment, agents that exit the
-simulation space from one side immediately re-appear on the other side}
+toroidal environments.
 In such environments, agents are bound to a small space and have unlimited 
-opportunities to re-enter the screen and join a flock; flock formation is rapid.
+opportunities to re-enter the screen and join a flock, and so flock formation
+is rapid.
 
 We study this question in a more adverse environment by proposing two new test 
 settings with lower agent density.
@@ -81,7 +83,8 @@ In the other setting, we make the simulation space non-toroidal but start the
 flocking agents in a circle in the center.
 Since this space is non-toroidal, flock formation is not guaranteed, so we
 study whether influencing agents can instigate flocking behavior by keeping the
-flocking agents in a pre-defined area, or move them all in a certain direction.
+flocking agents in a pre-defined area, or by moving them all in a certain
+direction.
 
 %To help organize our analysis, we consider three different aspects of
 %influencing agent design: placement strategy, local behaviors, and global
@@ -125,7 +128,8 @@ The final value of the computation is the value of the accumulator after each
 item has been folded over.
 
 We define a simple language that performs arithmetic computations
-on scalar values and angles, and evolve different functions to use in the fold.
+on scalar values and angles, and we evolve different functions in this language
+to use in the fold.
 To make the evolutionary process fast enough, we first evaluate different
 functions in a small environment, with six neighbors that start in a circle
 around a single influencing agent.
@@ -137,8 +141,8 @@ fitness value for the proposed program.
 We then run the evolutionary algorithm on this fitness value and mutate the
 best candidates each generation.
 
-To evaluate these behaviors in a wider context, we then test them in our two
-new settings as well.
+To evaluate these behaviors in a wider context, we then test them in the
+\textit{large} and \textit{herd} settings as well.
 We find that the genetic behaviors can both encourage faster convergence in the
 short term while still maintaining influence over the long-term.
 As a result, they can perform as well as the best hand-constructed algorithms.
@@ -148,7 +152,7 @@ The main contributions of this work are:
 \begin{itemize}
     \item An investigation of two new low-density flocking settings, where
     flock formation is more difficult.
-    \item The introduction of new influencing agent behaviors to adapt to the
+    \item The introduction of new influencing agent behaviors that adapt to the
     difficulties presented by these new settings.
     \item Analysis of the major differences in influencing agent priorities in
     low-density vs. high-density settings.

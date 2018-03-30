@@ -18,19 +18,18 @@ influencing agent behaviors, including questions of how best to join or leave
 a flock in real scenarios.
 Genter's PhD thesis also presents results from simulations with variations on
 Reynold's flocking model, as well as physical experiments with these algorithms
-in a small RoboCup setting.
+in a small RoboCup setting \cite{genterthesis}.
 
 This work has studied influencing agents in a number of contexts, including
 convergence in a small setting and steering a small, dense flock around an
 obstacle.
 We are primarily interested in building upon the work from the former context,
-although the second context is still interesting.
+although the latter context is still interesting.
 In their experiments, Genter and Stone place $180$ flocking agents and $20$
 influencing agents on a $150\times150$ toroidal grid, and let agents influence
 each other if they are in a neighborhood radius of $20$ units or less from each
 other.
 As a result, they simulate the dynamics of an extremely high-density flock.
-In our work, we introduce new settings to study dynamics in low-density flocks.
 We will introduce the formal flocking model and discuss Genter and Stone's
 placement strategies and algorithms in more detail in \S\ref{ch:problem} and
 \S\ref{ch:influencing}, but we will summarize Genter and Stone's key results
@@ -74,13 +73,13 @@ portion.
 
 Jadbadbaie et. al. \cite{jad2003convergence} have studied this model from an
 analytical perspective.
-Two strong results from this work are that a group of Reynolds-Vicsek agents
-in a toroidal setting will eventually converge regardless of initial
-conditions, and that in the presence of a single agent with fixed orientation
-(analogous to a single influencing agent), all the agents will converge to that
-fixed agent's orientation.
+Two strong results from this work are first, that a group of Reynolds-Vicsek
+agents in a toroidal setting will eventually converge regardless of initial
+conditions, and second, that in the presence of a single agent with fixed
+orientation (analogous to a single influencing agent), all the agents will
+converge to that fixed agent's orientation.
 This provides important context for Genter and Stone's work and the work that
-we present here; when the setting is toroidal, convergence is guaranteed, so
+we present here: when the setting is toroidal, convergence is guaranteed, so
 the interesting question is how fast we can reach convergence.
 
 Couzin et. al. \cite{couzin2005} have studied the design of influencing agents
@@ -136,26 +135,27 @@ limits the ducks' behavior.
 \section{Genetic Programming}
 Genetic programming \cite{kozaGP} uses evolutionary algorithms to explore the
 solution space of possible programs to optimize some metric.
-Common to all genetic programming techniques is some sort of genome that can be
-evolved over; in our work, this is a hand-designed domain-specific language
-that takes a list of neighbors as input and outputs an orientation for the
-influencing agent to face.
+Common to all genetic programming techniques is some sort of genome that we can
+evolve over; in our work, this genome is a hand-designed domain-specific
+language that forms the basis for a function which takes a list of neighbors as
+input and outputs an orientation for the influencing agent to face.
 We directly evolve the programs that define our influencing agents' behavior.
 Other choices for genome include neural networks or other data structures that
 can take the relevant input and generate a desired output; we do not explore
 these in our work.
 
 The evolutionary algorithms themselves can vary in specifics, but they all
-require some mutation function and fitness function, and sometimes a crossover
+require some mutation function, a fitness function, and sometimes a crossover
 function.
 A mutation function takes a genome and ``mutates" it in some way to produce
 another genome.
-In our work, this can happen by changing the value of a constant or a function
-somewhere in the abstract syntax tree; in a genome defined by a neural network,
-this can take the shape of changing the weights between some number of nodes.
-The fitness function is used to evaluate individual genomes; each generation,
+In a genome defined by a neural network, this could take the shape of changing
+the weights between some number of nodes; in our work, this happens by changing
+the value of a constant or a function somewhere in the abstract syntax tree.
+The fitness function is used to evaluate individual genomes: each generation,
 the output from the fitness function is used to select some number of genomes
-to mutate or carry on into the next generation (survival of the fittest).
+to carry on into the next generation, some of which may be mutated (survival of
+the fittest).
 Finally, some evolutionary algorithms, including ours, use a crossover function
 that takes two genomes and creates a new one from aspects of both (to simulate
 sexual reproduction).
@@ -169,7 +169,7 @@ In their project, they have complete control over every agent in the swarm;
 the goal of their genetic algorithm is to produce a program that can create
 collective behavior when run on every agent.
 In our work, we only have control over a limited number of influencing agents.
-In their work, Dorigo and Trianni use a neural network from sensors to the
+In their work, Dorigo and Trianni use a neural network from the sensors to the
 actuators of their robots as their genome.
 Although it would be interesting to apply this approach to our problem, we do
 not do so in this work.
@@ -189,7 +189,7 @@ biasing it toward any particular strategy.
 We have similar goals when designing our own execution model and language.
 
 Much work has been done on developing techniques for evolving programs in
-richer languages with complex constraints on which programs are valid
+richer languages with complex constraints for which the programs are valid
 \cite{BriggsGP}.
 Although we use functional programming ideas in our execution model, we keep
 our language simple, with only conditional expressions for control flow
