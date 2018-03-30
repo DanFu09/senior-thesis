@@ -10,10 +10,10 @@ number of Reynolds-Vicsek agents in their neighborhoods and have the pairs
 jointly run a \textit{one step lookahead} algorithm.
 The only difficult portion in this behavior is forming the pairs; once they are
 formed, \textit{one step lookahead} can be used without modification.
-Absent any optimizations, this is an $O(mn^2)$ [NOTE MAKE THIS A BIG O]
-algorithm, where $n$ is the number of influencing agents, and $m$ is the number
+Absent any optimizations, this is an $\smash{O}(mn^2)$ algorithm, where $n$ is the
+number of influencing agents, and $m$ is the number
 of Reynolds-Vicsek agents; the $n^2$ factor comes from the fact that there are
-only $O(n^2)$ possible pairings, and the $m$ factor reflects the worst case,
+only $\smash{O}(n^2)$ possible pairings, and the $m$ factor reflects the worst case,
 where all the agents are clustered in a very tight space.
 The Coordinated algorithm optimizes this search slightly by only considering
 influencing agents that can share Reynolds-Vicsek agents as neighbors, i.e.
