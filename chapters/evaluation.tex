@@ -30,8 +30,8 @@ flocks and average proportion of lone agents at each time step.
 In the \textit{large} setting, we test on a toroidal $1000\times1000$ grid with
 agents that have a neighborhood radius of $10$.
 In the \textit{herd} setting, we use a non-toroidal $5000\times5000$ grid, and
-position a herd of agents that have neighborhood radius of $10$ in a circle at
-the center of the grid with radius $500$.
+position a herd of agents that have neighborhood radius of $10$ within a circle
+of radius $500$ at the center of the grid.
 For all settings, we vary the number $N$ of agents from $50$ to $300$ in
 increments of $50$.
 We run both sets of simulations for $6000$ time steps.
@@ -71,7 +71,7 @@ We examine the three circular placement strategies, \textit{circle-border},
 \textit{circle-random}, and \textit{circle-grid}, with two placement radii,
 \textit{500} and \textit{750}, along with the \textit{k-means} placement
 strategy.
-We split our examination of behaviors between the \textit{net} behaviors
+We split our examination of behaviors between the net behaviors
 (the same behaviors as used in the \textit{large} setting, minus the
 \textit{multistep} behavior) and three stationary behaviors - namely
 \textit{circle}, \textit{polygon}, and \textit{multicircle}.
@@ -116,7 +116,7 @@ Reynolds-Vicsek agents in a circle around the influencing agent.
 However, random placement resulted in high variability for the same genome
 between generations, and it became difficult for the algorithm to find better
 genomes.
-We ultimately settled on a deterministic test to both reduce this variability
+We ultimately settled on a deterministic test both to reduce this variability
 and to allow for memoization to make our algorithm run faster.
 Finally, we set our regularization factor $\alpha$ to $0.1$ to allow
 development of complexity while also preventing blowout.
@@ -162,9 +162,9 @@ settings.
 In the \textit{large} setting, there are two qualitative stages of convergence:
 initial flock formation and flock unification.
 In the first stage, individual agents collide with each other and form small
-flocks.
-In the second stage, these small flocks that formed collide with one another and
-join together to form larger flocks.
+flocks, so the number of flocks increases.
+In the second stage, these small flocks collide with one another and join
+together to form larger flocks, so the number of flocks decreases.
 In Figure $\ref{fig:no_adhoc}$, the first stage is represented by the initial
 increase in the average number of flocks, and the second stage is represented
 by the following decrease in the average number of flocks.
@@ -220,9 +220,9 @@ the \textit{one step lookahead} and \textit{coordinated} behaviors
 significantly underperform the ``baseline" \textit{face} and
 \textit{offset momentum} behaviors, irrespective of placement strategy.
 This is an opposite result from Genter and Stone's findings on smaller simulation
-spaces \cite{genter201612steplookahead, genterthesis}, which found that
-\textit{one step lookahead} and \textit{coordinated} outperform \textit{face}
-and \textit{offset momentum}.
+spaces \cite{genter201612steplookahead, genterthesis}, which found that the
+\textit{one step lookahead} and \textit{coordinated} behaviors outperform the
+\textit{face} and \textit{offset momentum} behaviors.
 This finding is also rather counterintuitive; why should the ``smarter" behaviors
 underperform the simpler behaviors?
 
@@ -247,11 +247,11 @@ here because they tend to send influencing agents away from neighboring agents.
     \label{fig:losing_influence}
 \end{figure}
 An example of this phenomenon is shown in Figure $\ref{fig:losing_influence}$.
-The influencing agent, shown in black, adopts an orientation that turns
+The influencing agent, shown in red, adopts an orientation that maximally turns
 neighboring Reynolds-Vicsek agents towards the goal direction.
 Even though this does turn Reynolds-Vicsek agents towards the goal direction,
 it cannot successfully turn all the agents in a single step; as a result, it
-must maintain that orientation for future steps.
+must maintain a similar orientation for future steps.
 However, as long as the neighboring agents are not facing the goal direction,
 the influencing agent's chosen orientation takes it away from the center of the
 flock of Reynolds-Vicsek agents, causing it to lose influence.
@@ -423,8 +423,7 @@ For the stationary behaviors, we find that the \textit{multicircle} behavior
 slightly underperforms the \textit{circle} behavior when paired with the
 \textit{Border} placement strategies; slightly overperforms when paired
 with the  \textit{k-means}, \textit{Random}, and \textit{Grid 500} placement
-strategies; and performs the same as \textit{circle} in the \textit{Grid 750}
-strategy.
+strategies; and performs at par in the \textit{Grid 750} strategy.
 What drives these trends?
 Once \textit{multicircle} reaches the final stage, it is tracing a larger
 circle than the \textit{circle} behavior traces on its own.
@@ -438,8 +437,8 @@ behavior in the final stage.
 Finally, we note that \textit{Border 750} is the worst placement strategy,
 for reasons similar to the reasons for the net behaviors, and \textit{polygon}
 tends to underperform or match the performance of \textit{circle}.
-This tells us that adopting occasional sharper turns can sometimes be harmful,
-but not always.
+This last observation tells us that adopting occasional sharper turns can
+sometimes be harmful, but not always.
 
 \subsection{Evolutionary Experiments}
 Next, we report on the results of our evolutionary experiments.
@@ -454,10 +453,11 @@ results where possible.
 We allowed for duplicate members in the population.
 The average angle difference across the population and the angle difference of
 the best genome in each generation are shown in Figure $\ref{fig:genetic_runs}$.
-We also show performances of \textit{face}, \textit{offset momentum},
-\textit{one step lookahead}, and \textit{Couzin} for comparison.
-We do not show \textit{coordinated}, since \textit{coordinated} is equivalent
-to \textit{one step lookahead} when there is only a single influencing agent.
+We also show performances of the \textit{face}, \textit{offset momentum},
+\textit{one step lookahead}, and \textit{Couzin} behaviors for comparison.
+We do not show the \textit{coordinated} behavior, since it is equivalent
+to the \textit{one step lookahead} behavior when there is only a single
+influencing agent.
 \begin{figure}
     \centering
     \includegraphics[width=0.45\textwidth]{run07}
@@ -469,8 +469,8 @@ to \textit{one step lookahead} when there is only a single influencing agent.
     population over generations for a five different runs of the genetic algorithm.
     The first four runs had population size $25$ and ran for $50$ generations,
     while the last run has population size $100$ and ran for $300$ generations.
-    Fitnesses of \textit{face}, \textit{offset momentum}, \textit{one step
-    lookahead}, and \textit{Couzin} provided for comparison.}
+    Fitnesses of the \textit{face}, \textit{offset momentum}, \textit{one step
+    lookahead}, and \textit{Couzin} behaviors provided for comparison.}
     \label{fig:genetic_runs}
 \end{figure}
 
@@ -548,7 +548,7 @@ The other genetic processes behave very similarly to the behavior shown in the
 screenshots, with slight variations (i.e., turning north instead of south, etc).
 
 This behavior is very interesting scientifically for the differences between it
-and \textit{one step lookahead}.
+and the \textit{one step lookahead} behavior.
 In particular, the genetic behaviors immediately turn towards the Reynolds-Vicsek
 agents behind them, and ignore the agents in front of them.
 There are two major insights we can glean from this behavior.
@@ -558,15 +558,15 @@ as they try to turn their neighbors towards the goal direction.
 In other words, the genetic behaviors implicitly value influence over rapid
 convergence.
 We hypothesize that this arises because evaluation happens after $100$ steps and
-not after $1$ step, as with \textit{one step lookahead}, but more work is
-needed to answer this definitively.
+not after $1$ step, as with the \textit{one step lookahead} behavior, but more
+work is needed to answer this definitively.
 
 Second, the influencing agents ignore the Reynolds-Vicsek agents in front of
 them.
 There are a few reasons why this is beneficial.
 Since the influencing agents have limited speed, they can never ``catch
 up" to the agents directly in front of them.
-The \textit{one step lookahead} algorithm does not take this into account;
+The \textit{one step lookahead} behavior does not take this into account;
 as long as a neighbor is in range, its heading is factored into the calculation,
 no matter whether the influencing agent can ever reach the neighbor.
 Furthermore, it is much easier to lose influence over forward neighbors, since
@@ -578,9 +578,9 @@ is beneficial to ignore them.
 \subsection{Influencing Agents in the Large and Herd Settings}
 Next, we verify that the genetic algorithms are still effective when used in
 our larger settings.
-For example, \textit{one step lookahead} outperforms \textit{face} in the
-small-scale evaluations we use during evolution, but underperforms \textit{face}
-in simulations in the \textit{large} setting.
+For example, the \textit{one step lookahead} behavior outperforms the
+\textit{face} behavior in the small-scale evaluations we use during evolution,
+but underperforms the \textit{face} behavior in the \textit{large} setting.
 The results are shown in Figure $\ref{fig:largegenetic}$.
 
 \begin{figure}
@@ -599,8 +599,7 @@ better than, the \textit{face} behavior.
 They all strongly outperform the \textit{one step lookahead} and
 \textit{coordinated} behaviors, and slightly outperform the
 \textit{offset momentum} behavior.
-None perform as well as the \textit{multistep} behavior, though $\textit{G1}$
-comes close.
+None perform as well as the \textit{multistep} behavior.
 
 %When paired with the \textit{random} global behavior, however, the story changes
 %drastically.
@@ -644,9 +643,9 @@ when used in the \textit{net} case of the \textit{herd} setting.
     Error bars show standard error of hte mean.}
     \label{fig:herdnetgenetic}
 \end{figure}
-Again, across the board, the genetic behaviors perform as well as \textit{face}
-or \textit{Couzin}, and outperform \textit{offset momentum}, \textit{one step
-lookahead}, and \textit{coordinated}.
+Again, across the board, the genetic behaviors perform as well as the
+\textit{face} and \textit{Couzin} behaviors, and outperform the \textit{offset
+momentum}, \textit{one step lookahead}, and \textit{coordinated} behaviors.
 The only exception is in the \textit{Random 750} placement strategy, where all
 the genetic behaviors do worse.
 We are not sure what drives this effect, but we note that the \textit{Couzin}

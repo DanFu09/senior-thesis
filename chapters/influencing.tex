@@ -60,14 +60,14 @@ For a discussion of this question, we refer the reader to Genter and Stone
 
 We use three placement strategies for the \textit{large} setting:
 \textit{random}, \textit{grid}, and \textit{k-means}.
-The random placement strategy, as its name suggests, places influencing agents
-randomly throughout the grid.
-The grid placement strategy computes a square lattice on the grid and places
-influencing agents on the lattice points.
+The \textit{random} placement strategy, as its name suggests, places
+influencing agents randomly throughout the grid.
+The \textit{grid} placement strategy computes a square lattice on the grid and
+places influencing agents on the lattice points.
 This strategy ensures regular placement of influencing agents throughout the
 grid.
-The k-means placement strategy uses a k-means clustering algorithm on the
-positions of Reynolds-Vicsek agents in the simulation space.
+The \textit{k-means} placement strategy uses a k-means clustering algorithm on
+the positions of Reynolds-Vicsek agents in the simulation space.
 This strategy finds a cluster for each influencing agent by setting $k$ equal
 to the number of influencing agents, and then places an influencing agent at
 the center of each cluster.
@@ -80,13 +80,13 @@ strategy in terms of some radius $r$ about an origin $O$, except for the
 We modify the \textit{random} placement strategy to randomly distribute agents
 within the circle of radius $r$ about the origin $O$, instead of the entire
 simulation space.
-We adapt the grid placement strategy to a circular setting using a sunflower
-spiral \cite{segermansunflower}.
+We adapt the \textit{grid} placement strategy to a circular setting using a
+sunflower spiral \cite{segermansunflower}.
 In polar coordinates relative to $O$, the position of the $n$-th influencing
 agent in a sunflower spiral is given by $(c\sqrt{n}, \frac{2\pi}{\phi^2}n)$,
 where $\phi$ is the golden ratio, and $c$ is a normalizing constant such that
 the last influencing agent has distance $r$ from $O$.
-We also introduce a circle border placement strategy, inspired from the border
+We also introduce a circular placement strategy, inspired from the border
 strategies from \cite{genter2015placement}.
 This strategy places agents on the circumference of the circle of radius $r$
 around the origin $O$.
@@ -96,7 +96,7 @@ We refer to the circular strategies as \textit{circle-random},
 \section{Behaviors}
 Once we have placed our influencing agents, we still need to design how they
 will work together to influence the flock.
-We call this aspect of the design influencing agent behaviors.
+We call this aspect of the design influencing agent behavior.
 In the present work we focus on decentralized ``ad-hoc" algorithms for our
 influencing agents, since this class of algorithms has been the focus of the
 existing multiagent systems literature on this topic
@@ -523,7 +523,7 @@ very simple.
 Because the execution model handles looping over the list of neighbors, there
 is no need for the language itself to have syntax expressing loops or lists.
 Although allowing the language to have lists and loops would increase its
-expressiveness, we opted to keep the language simple while still expressive
+expressiveness, we opted to keep the language simple but still expressive
 enough to allow the genetic algorithm to develop complex behaviors.
 We also chose to leave out other possible capabilities such as mechanisms for
 storing state other than the accumulator value and for communicating with other
@@ -631,7 +631,7 @@ We add those $N$ genomes into the new population.
 Then, while the size of the new population is smaller than the size of the
 old population, we repeat the following:
 \begin{enumerate}
-    \item Flip a coin to decide whether to create (a) new member(s) by mutation
+    \item Flip a coin to decide whether to create a new member(s) by mutation
     or crossover.
     \item If mutation, randomly select one genome from the seed population,
     mutate it, and add it to the new population.

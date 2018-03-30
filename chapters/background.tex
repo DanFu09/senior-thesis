@@ -16,9 +16,10 @@ genter2016facegoalfacecurrent, genter201612steplookahead}.
 This prior literature has studied a number of placement strategies and
 influencing agent behaviors, including questions of how best to join or leave
 a flock in real scenarios.
-Genter's PhD thesis also presents results from simulations with variations on
-Reynold's flocking model, as well as physical experiments with these algorithms
-in a small RoboCup setting \cite{genterthesis}.
+Genter's PhD thesis also presents results from simulations with different
+variations on the flocking model we use in this work, as well as physical
+experiments with these algorithms in a small RoboCup setting
+\cite{genterthesis}.
 
 This work has studied influencing agents in a number of contexts, including
 convergence in a small setting and steering a small, dense flock around an
@@ -100,10 +101,10 @@ fly around and correct the orientation of agents one at a time.
 The result is that the Reynolds-Vicsek agents all eventually converge to the
 target direction, but are not connected to each other.
 In our work, we limit the speed of influencing agents to be the same as the
-Reynolds-Vicsek agents to prevent the use of behaviors like this, and in hopes
+Reynolds-Vicsek agents to prevent the use of behaviors like this, in hopes
 that our results will be more applicable to real applications; we suspect that
-influencing agents that act similarly to real birds will be more successful in
-real-world applications.
+influencing agents that act similarly to real agents will be more successful
+in real applications.
 
 Su. et. al. \cite{su2009virtualleaderinformed} have also studied the question
 of flock formation and convergence, but have studied the question in the
@@ -136,9 +137,9 @@ limits the ducks' behavior.
 Genetic programming \cite{kozaGP} uses evolutionary algorithms to explore the
 solution space of possible programs to optimize some metric.
 Common to all genetic programming techniques is some sort of genome that we can
-evolve over; in our work, this genome is a hand-designed domain-specific
-language that forms the basis for a function which takes a list of neighbors as
-input and outputs an orientation for the influencing agent to face.
+evolve over; in our work, this genome is a function, written in a hand-designed
+domain-specific language, which takes as input a list of neighbors and outputs
+an orientation for the influencing agent to face.
 We directly evolve the programs that define our influencing agents' behavior.
 Other choices for genome include neural networks or other data structures that
 can take the relevant input and generate a desired output; we do not explore
@@ -149,9 +150,10 @@ require some mutation function, a fitness function, and sometimes a crossover
 function.
 A mutation function takes a genome and ``mutates" it in some way to produce
 another genome.
-In a genome defined by a neural network, this could take the shape of changing
-the weights between some number of nodes; in our work, this happens by changing
-the value of a constant or a function somewhere in the abstract syntax tree.
+In a genome defined by a neural network, for example, this could take the shape
+of changing the weights between some number of nodes; in our work, this happens
+by changing the value of a constant or a function somewhere in the abstract
+syntax tree.
 The fitness function is used to evaluate individual genomes: each generation,
 the output from the fitness function is used to select some number of genomes
 to carry on into the next generation, some of which may be mutated (survival of
@@ -189,8 +191,8 @@ biasing it toward any particular strategy.
 We have similar goals when designing our own execution model and language.
 
 Much work has been done on developing techniques for evolving programs in
-richer languages with complex constraints for which the programs are valid
-\cite{BriggsGP}.
+richer languages with complex constraints which constrain the space of valid
+programs \cite{BriggsGP}.
 Although we use functional programming ideas in our execution model, we keep
 our language simple, with only conditional expressions for control flow
 structures and only a single type.

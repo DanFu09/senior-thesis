@@ -24,7 +24,7 @@ genter201612steplookahead, genterthesis}
 has explored the use of influencing agents to guide flocking 
 agents to face a target direction in small and toroidal\footnote{In a toroidal
 environment, agents that exit the simulation space from one side immediately
-re-appear on the other side} settings.
+re-appear on the other side.} settings.
 In such settings, agent density is high, so interactions are common, and flock
 formation is rapid.
 In this work, we build upon past work by studying lower-density settings where
@@ -66,21 +66,16 @@ settings.
 For our work, we draw heavily from a recent series of studies of this problem by
 Genter and Stone \cite{genter2013backsearch, genter2013visionstationary, 
 genter2014neighborsorientherd, genter2015placement, genter2016facegoalfacecurrent, 
-genter201612steplookahead, genterthesis}.
-Genter and Stone study influencing agent placement and behavior in small,
-toroidal environments.
-In such environments, agents are bound to a small space and have unlimited 
-opportunities to re-enter the screen and join a flock, and so flock formation
-is rapid.
-
+genter201612steplookahead, genterthesis}, who have studied influencing agent
+placement and behavior in the small, toroidal environments referenced above.
 We study this question in a more adverse environment by proposing two new test 
 settings with lower agent density.
 In one setting, we keep the simulation space toroidal but increase the size of
 the space by several factors, greatly decreasing agent density.
 Flock formation is still provably guaranteed in this setting, but is much less
-rapid, so we study whether influencing agents can speed up flock formation.
+rapid, so we study how much influencing agents can speed up flock formation.
 In the other setting, we make the simulation space non-toroidal but start the
-flocking agents in a circle in the center.
+flocking agents inside a circle in the center.
 Since this space is non-toroidal, flock formation is not guaranteed, so we
 study whether influencing agents can instigate flocking behavior by keeping the
 flocking agents in a pre-defined area, or by moving them all in a certain
@@ -118,7 +113,7 @@ Finally, we find that reasonable placement strategies are often
 interchangeable, and that more complex strategies often perform similarly to 
 random strategies.
 
-Next, we use genetic programming to generate different new behaviors.
+Next, we use genetic programming to generate new behaviors.
 In order to build behaviors that work with variable numbers of neighbors, we
 evolve programs that are applied iteratively to each neighbor using
 a functional programming construct called a fold.
@@ -135,17 +130,18 @@ functions in a small environment, with six neighbors that start in a circle
 around a single influencing agent.
 We run four trials; in each trial, the six neighbors (and the influencing agent)
 are facing one of the cardinal directions, and the target direction is east.
-We measure the average angle offset from the goal direction of the flocking
+We measure the average angle offset from the target direction of the flocking
 agents after $100$ steps and take the average across the four trials as the
 fitness value for the proposed program.
 We then run the evolutionary algorithm on this fitness value and mutate the
 best candidates each generation.
 
-To evaluate these behaviors in a wider context, we then test them in the
-\textit{large} and \textit{herd} settings as well.
+To evaluate these behaviors in a wider context, we then test them in our new
+settings as well.
 We find that the genetic behaviors can both encourage faster convergence in the
-short term while still maintaining influence over the long-term.
-As a result, they can perform as well as the best hand-constructed algorithms.
+short term and maintain influence over the long-term.
+As a result, they avoid the pitfalls of some of the more complex
+hand-constructed algorithms.
 However, they can also be difficult to understand and reason about.
 
 The main contributions of this work are:
